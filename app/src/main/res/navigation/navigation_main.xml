@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/nav_main">
+
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="com.example.yanfa.ui.fragment.MainFragment"
+        android:label="研发中心"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_nav_main_to_nav_enroll"
+            app:destination="@id/nav_enroll" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_examine"
+        android:name="com.example.yanfa.ui.fragment.ExamineFragment"
+        android:label="考核流程"
+        tools:layout="@layout/fragment_examine" />
+    <fragment
+        android:id="@+id/nav_enroll"
+        android:name="com.example.yanfa.ui.fragment.EnrollFragment"
+        android:label="报名"
+        tools:layout="@layout/fragment_enroll" />
+    <fragment
+        android:id="@+id/nav_author"
+        android:name="com.example.yanfa.ui.fragment.AuthorFragment"
+        android:label="关于作者"
+        tools:layout="@layout/fragment_author" />
+
+</navigation>

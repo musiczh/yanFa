@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="@string/main"
+            android:id="@+id/nav_main"
+            android:icon="@drawable/main_white"/>
+
+    <item android:title="@string/examine"
+            android:id="@+id/nav_examine"
+            android:icon="@drawable/examine_white"/>
+
+
+    <item android:title="@string/join_us">
+        <menu>
+           <item android:title="@string/enroll"
+               android:id="@+id/nav_enroll"
+               android:icon="@drawable/enroll_white_64"/>
+            <item android:title="@string/author"
+                android:id="@+id/nav_author"
+                android:icon="@drawable/about_white"/>
+        </menu>
+    </item>
+
+</menu>

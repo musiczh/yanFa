@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.yanfa.widget.DrawerLayoutNoSlidingConflict xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <include
+        layout="@layout/drawer_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigationView_main"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/header_layout"
+        />
+
+
+
+</com.example.yanfa.widget.DrawerLayoutNoSlidingConflict>
