@@ -1,5 +1,6 @@
  package com.example.yanfa;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,6 +34,9 @@ import java.util.Objects;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            MainActivity.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.activity_main);
 
         //设置toolbar
@@ -44,13 +48,10 @@ import java.util.Objects;
 
 
 
-
-
-
         //更改DrawerLayout的侧滑距离
         DrawerLayoutNoSlidingConflict drawerLayout = findViewById(R.id.drawerLayout_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            setDrawerLeftEdgeSize(this,drawerLayout,0.5f);
+            setDrawerLeftEdgeSize(this,drawerLayout,0.2f);
 
         //将DrawerLayout和AppBar联合起来
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_main,R.id.nav_examine).setDrawerLayout(drawerLayout).build();
@@ -58,6 +59,7 @@ import java.util.Objects;
         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView,navController);
+
 
 
         //登录文字监听
@@ -109,4 +111,15 @@ import java.util.Objects;
              e.printStackTrace();
          }
      }
-}
+
+     public void turn_enroll(){
+        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_enroll);
+     }
+
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+         if (resultCode == 1) turn_enroll();
+     }
+ }

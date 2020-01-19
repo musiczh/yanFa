@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 /**
- * 解决滑动冲突DrawerLayout控件
+ * 解决滑动冲突DrawerLayout侧滑控件
  */
 public class DrawerLayoutNoSlidingConflict extends DrawerLayout {
     public DrawerLayoutNoSlidingConflict(@NonNull Context context) {

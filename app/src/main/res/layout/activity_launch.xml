@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
+    android:theme="@style/LaunchTheme"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.LaunchActivity">
 
     <ImageView
@@ -16,6 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.32999998"
+        android:contentDescription="@string/image_is_blank" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
