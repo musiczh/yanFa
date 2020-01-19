@@ -13,6 +13,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="">
         <activity android:name=".ui.activity.DetailActivity"/>
+
+
+
         <activity android:name=".ui.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
