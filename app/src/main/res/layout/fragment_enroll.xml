@@ -9,13 +9,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/set_up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/name_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -46,7 +46,6 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintBottom_toBottomOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -64,7 +63,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/boy_checkBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -76,17 +75,17 @@
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/girl_checkBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:text="@string/girl"
                 android:textSize="18dp"
-                app:layout_constraintBottom_toBottomOf="@+id/checkBox"
-                app:layout_constraintEnd_toEndOf="@+id/editText"
-                app:layout_constraintStart_toEndOf="@+id/checkBox"
-                app:layout_constraintTop_toTopOf="@+id/checkBox"
+                app:layout_constraintBottom_toBottomOf="@+id/boy_checkBox"
+                app:layout_constraintEnd_toEndOf="@+id/name_editText"
+                app:layout_constraintStart_toEndOf="@+id/boy_checkBox"
+                app:layout_constraintTop_toTopOf="@+id/boy_checkBox"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -100,16 +99,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/student_number_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
+                android:inputType="phone"
                 app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="@+id/checkBox2"
+                app:layout_constraintEnd_toEndOf="@+id/girl_checkBox"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -124,16 +122,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/major_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintEnd_toEndOf="@+id/editText3"
+                app:layout_constraintEnd_toEndOf="@+id/student_number_editText"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
 
@@ -148,16 +145,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/grade_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintEnd_toEndOf="@+id/editText4"
+                app:layout_constraintEnd_toEndOf="@+id/major_editText"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
 
@@ -173,15 +169,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/phone_number_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
+                android:inputType="phone"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                app:layout_constraintEnd_toEndOf="@+id/editText5"
-                app:layout_constraintStart_toStartOf="@+id/editText5"
+                app:layout_constraintEnd_toEndOf="@+id/grade_editText"
+                app:layout_constraintStart_toStartOf="@+id/grade_editText"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
 
             <TextView
@@ -190,32 +185,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/direction"
                 android:textSize="18dp"
-                app:layout_constraintBottom_toBottomOf="@+id/radioButton"
+                app:layout_constraintBottom_toBottomOf="@+id/java_radioButton"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/radioButton3" />
+                app:layout_constraintTop_toTopOf="@+id/android_radioButton" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/web_radioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:text="@string/Web"
-                app:layout_constraintBottom_toBottomOf="@+id/radioButton3"
-                app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                app:layout_constraintTop_toTopOf="@+id/radioButton3" />
+                app:layout_constraintBottom_toBottomOf="@+id/android_radioButton"
+                app:layout_constraintStart_toEndOf="@+id/android_radioButton"
+                app:layout_constraintTop_toTopOf="@+id/android_radioButton" />
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/java_radioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/java"
-                app:layout_constraintStart_toStartOf="@+id/radioButton3"
-                app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
+                app:layout_constraintStart_toStartOf="@+id/android_radioButton"
+                app:layout_constraintTop_toBottomOf="@+id/android_radioButton" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/android_radioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -224,13 +219,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/big_data_radioButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/big_data"
-                app:layout_constraintBottom_toBottomOf="@+id/radioButton"
-                app:layout_constraintStart_toStartOf="@+id/radioButton2"
-                app:layout_constraintTop_toTopOf="@+id/radioButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/java_radioButton"
+                app:layout_constraintStart_toStartOf="@+id/web_radioButton"
+                app:layout_constraintTop_toTopOf="@+id/java_radioButton" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -241,27 +236,34 @@
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+                app:layout_constraintTop_toBottomOf="@+id/java_radioButton" />
 
 
-            <MultiAutoCompleteTextView
-                android:id="@+id/content_Auto_Text"
+            <EditText
+                android:id="@+id/self_edt"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/edit_text_style"
-                android:gravity="start"
+                android:background="@android:drawable/edit_text"
+                android:enabled="true"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+
+                android:maxLines="10"
+                android:minLines="8"
+                android:scrollbars="vertical"
+                android:textColor="#1F1F1F	"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/editText6"
+                app:layout_constraintEnd_toEndOf="@+id/phone_number_editText"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView8" />
+                app:layout_constraintTop_toTopOf="@+id/textView8">
+
+            </EditText>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/set_up_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
