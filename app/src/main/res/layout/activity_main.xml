@@ -18,6 +18,8 @@
         android:layout_height="match_parent"
         android:id="@+id/navigationView_main"
         android:layout_gravity="start"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="@color/colorCardTransparent"
         app:menu="@menu/nav_menu"
         app:headerLayout="@layout/header_layout"
         />

@@ -10,7 +10,12 @@
         android:roundIcon="@drawable/yanfa_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        >
+        <activity android:name=".ui.activity.DetailActivity"/>
+
+
+
         <activity android:name=".ui.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

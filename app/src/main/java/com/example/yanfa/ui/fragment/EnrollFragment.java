@@ -55,9 +55,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener {
         editTex2 = view.findViewById(R.id.student_number_editText);
         editText3 = view.findViewById(R.id.major_editText);
         editText4= view.findViewById(R.id.grade_editText);
-
         editText5 = view.findViewById(R.id.phone_number_editText);
-
         mAndroidBtn = view.findViewById(R.id.android_radioButton);
         mWebBtn = view.findViewById(R.id.web_radioButton);
         mJavaBtn = view.findViewById(R.id.java_radioButton);
@@ -82,7 +80,6 @@ public class EnrollFragment extends Fragment implements View.OnClickListener {
                 case R.id.set_up_button:
                     Log.d("Enroll","点击按钮");
                     mNameEdt = editText.getText().toString();
-
                     mStuNumEdt = editTex2.getText().toString();
                     mMajorEdt = editText3.getText().toString();
                     mGradeEdt = editText4.getText().toString();
@@ -90,7 +87,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener {
                     mMySelfEdt = editText6.getText().toString();
                     mSetUpBtn.setOnClickListener(this);
                     Log.d("Edt",mNameEdt);
-
+                    Log.d("","");
                     break;
             }
 
