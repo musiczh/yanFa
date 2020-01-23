@@ -47,10 +47,10 @@
     <string name="grade">"班级:"</string>
     <string name="phone_number">"手机号码:"</string>
     <string name="direction">"报名方向:"</string>
-    <string name="java">"java后台"</string>
-    <string name="Web">"Web前端"</string>
+    <string name="java">"后台"</string>
+    <string name="Web">"前端"</string>
     <string name="Android">"Android"</string>
-    <string name="big_data">"大数据"</string>
+    <string name="big_data">"大数据  "</string>
     <string name="self_introduction">"自我介绍:"</string>
     <string name="set_up">"开启我的研发之旅"</string>
 

@@ -179,53 +179,77 @@
                 app:layout_constraintStart_toStartOf="@+id/grade_editText"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
 
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+                <RadioButton
+                    android:id="@+id/java_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/java" />
+
+                <RadioButton
+                    android:id="@+id/android_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Android" />
+
+
+            </RadioGroup>
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/direction"
                 android:textSize="18dp"
-                app:layout_constraintBottom_toBottomOf="@+id/java_radioButton"
+                app:layout_constraintBottom_toBottomOf="@+id/radioGroup2"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/android_radioButton" />
+                app:layout_constraintTop_toTopOf="@+id/radioGroup" />
 
-            <RadioButton
-                android:id="@+id/web_radioButton"
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:text="@string/Web"
-                app:layout_constraintBottom_toBottomOf="@+id/android_radioButton"
-                app:layout_constraintStart_toEndOf="@+id/android_radioButton"
-                app:layout_constraintTop_toTopOf="@+id/android_radioButton" />
-
-            <RadioButton
-                android:id="@+id/java_radioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/java"
-                app:layout_constraintStart_toStartOf="@+id/android_radioButton"
-                app:layout_constraintTop_toBottomOf="@+id/android_radioButton" />
-
-            <RadioButton
-                android:id="@+id/android_radioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/Android"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/phone_number_editText">
 
-            <RadioButton
-                android:id="@+id/big_data_radioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/big_data"
-                app:layout_constraintBottom_toBottomOf="@+id/java_radioButton"
-                app:layout_constraintStart_toStartOf="@+id/web_radioButton"
-                app:layout_constraintTop_toTopOf="@+id/java_radioButton" />
+
+                <RadioButton
+                    android:id="@+id/web_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Web" />
+
+                <RadioButton
+                    android:id="@+id/big_data_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/big_data" />
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/textView8"
@@ -234,29 +258,32 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/self_introduction"
                 android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/java_radioButton" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
 
             <EditText
                 android:id="@+id/self_edt"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:drawable/edit_text"
+                android:background="@drawable/edit_text_style"
                 android:enabled="true"
+
                 android:gravity="top"
                 android:inputType="textMultiLine"
-
                 android:maxLines="10"
                 android:minLines="8"
                 android:scrollbars="vertical"
                 android:textColor="#1F1F1F	"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/phone_number_editText"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView8">
+                app:layout_constraintTop_toTopOf="@+id/textView8"
+                app:layout_constraintVertical_bias="0.0">
 
             </EditText>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -264,9 +291,14 @@
 
     <Button
         android:id="@+id/set_up_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/rect_gray"
         android:text="@string/set_up"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
