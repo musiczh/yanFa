@@ -3,14 +3,19 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#ffffff</item>
-        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">#00000000</item>
 
     </style>
 
-    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Dark">
-        <!-- Customize your theme here. -->
+    <style name="MainTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#ffffff</item>
     </style>
+
+
+
+
+
 </resources>

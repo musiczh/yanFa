@@ -10,12 +10,9 @@
         android:roundIcon="@drawable/yanfa_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
-        <activity android:name=".ui.activity.DetailActivity"/>
-
-
-
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.activity.SignUpActivity"/>
+        <activity android:name=".ui.activity.DetailActivity" />
         <activity android:name=".ui.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/MainTheme"/>
     </application>
 
 </manifest>

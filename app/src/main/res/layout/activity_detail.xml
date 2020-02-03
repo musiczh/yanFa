@@ -11,6 +11,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:fitsSystemWindows="true"
         >
 
@@ -30,21 +31,25 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/logo_b"
                 app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"
                 android:contentDescription="@string/image_is_blank" />
+
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#20000000"
+                android:background="#40000000"
                 app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"
                 android:contentDescription="@string/image_is_blank" />
+
 
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_detail"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ToolBarTheme"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:layout_collapseMode="pin"
                  />
 
