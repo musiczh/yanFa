@@ -3,7 +3,6 @@ package com.example.yanfa.ui.activity;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.yanfa.ui.fragment.MainFragment;
 import com.example.yanfa.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.Objects;
 
 public class DetailActivity extends AppCompatActivity {
@@ -24,9 +21,9 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            DetailActivity.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            DetailActivity.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
         setContentView(R.layout.activity_detail);
 
         Toolbar toolbar = findViewById(R.id.toolbar_detail);
@@ -35,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        //获取对应控件的实例
         ImageView imageView = findViewById(R.id.imageView_detail_head);
         TextView textView = findViewById(R.id.textView_detail_introduction);
         FloatingActionButton floatingActionButton = findViewById(R.id.fab);
@@ -47,28 +45,35 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+
+        //判断是点击哪一个模块，使用对应的信息
         Intent intent = getIntent();
         int type = intent.getIntExtra("type",0);
         switch (type){
             case MainFragment.ANDROID:
                 imageView.setImageResource(R.drawable.android);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                toolbar.setTitle(R.string.Android);
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 textView.setText(R.string.android_introduction);
                 break;
             case MainFragment.YANFA:
                 imageView.setImageResource(R.drawable.logo_b);
+                toolbar.setTitle(R.string.yanfa_name);
                 textView.setText(R.string.yanfa_introduction);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 break;
             case MainFragment.JAVA:
                 imageView.setImageResource(R.drawable.java);
+                toolbar.setTitle(R.string.java);
                 textView.setText(R.string.java_introduction);
                 break;
             case MainFragment.WEB:
+                toolbar.setTitle(R.string.web);
                 imageView.setImageResource(R.drawable.web);
                 textView.setText(R.string.web_introduction);
                 break;
             case MainFragment.DATA:
+                toolbar.setTitle(R.string.big_data);
                 imageView.setImageResource(R.drawable.big_data);
                 textView.setText(R.string.data_introduction);
                 break;

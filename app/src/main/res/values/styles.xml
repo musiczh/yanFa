@@ -10,14 +10,7 @@
 
     </style>
 
-    <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#ffffff</item>
-        <item name="colorPrimaryDark">#ffffff</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">#2196F3</item>
-        <item name="android:background">#2196F3</item>
-    </style>
+
 
 
 

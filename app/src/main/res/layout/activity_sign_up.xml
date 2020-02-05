@@ -19,7 +19,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintVertical_bias="0.45"/>
 
-    
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,14 +43,12 @@
             android:id="@+id/textInputEditText_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLength="11"
             android:hint="@string/cell_number"
             android:inputType="number"
+            android:maxLength="11"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             />
-
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,6 +56,7 @@
         android:id="@+id/textInputLayout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:passwordToggleEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/center_point"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -76,23 +74,41 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/center_point"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_code">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="6"
+            android:hint="@string/verification_code"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_code"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="35dp"
+        android:layout_marginRight="24dp"
         android:background="@drawable/shape"
-        android:paddingStart="36dp"
-        android:paddingEnd="36dp"
-        android:paddingBottom="2dp"
-        android:text="@string/sign_in_yanfa"
+        android:text="@string/send_verification_code"
         android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/textInputLayout_code"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_password" />
-    
+        app:layout_constraintTop_toBottomOf="@id/center_point"
+        app:layout_constraintBottom_toBottomOf="@id/textInputLayout_code"
+        android:layout_marginEnd="24dp" />
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -102,33 +118,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:contentDescription="@string/image_is_blank" />
 
-    <TextView
-        android:id="@+id/textView_forget"
+    <Button
+        android:id="@+id/button_sign_up"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:textColor="#1565C0"
-        android:text="@string/forget_password"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="@+id/textInputLayout_password"
-        app:layout_constraintTop_toBottomOf="@id/button_login"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:paddingStart="36dp"
+        android:paddingEnd="36dp"
+        android:background="@drawable/shape"
+        android:text="@string/join_yanfa"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_code"
          />
 
-    <TextView
-        android:id="@+id/textView_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:textColor="#1565C0"
-        android:text="@string/sign_up"
-        android:layout_marginRight="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toRightOf="@+id/textInputLayout_password"
-        app:layout_constraintTop_toBottomOf="@id/button_login"
-         />
+
 
 
 
