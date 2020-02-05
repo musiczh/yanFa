@@ -43,8 +43,10 @@
     <string name="boy">"男"</string>
     <string name="girl">"女"</string>
     <string name="student_number">"学号:"</string>
+    <string name="faculty">"学院:"</string>
     <string name="major">"专业:"</string>
     <string name="grade">"班级:"</string>
+    <string name="qq">"QQ:"</string>
     <string name="phone_number">"手机号码:"</string>
     <string name="direction">"报名方向:"</string>
     <string name="java">"后台"</string>
@@ -53,6 +55,8 @@
     <string name="big_data">"大数据  "</string>
     <string name="self_introduction">"自我介绍:"</string>
     <string name="set_up">"开启我的研发之旅"</string>
+
+
 
 
 

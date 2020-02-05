@@ -21,6 +21,7 @@ import com.example.yanfa.R;
 import com.example.yanfa.contract.IEnrollContract;
 import com.example.yanfa.presenter.EnrollBasePresenter;
 import com.example.yanfa.presenter.EnrollPresenter;
+import com.google.android.material.textfield.TextInputLayout;
 
 
 /**
@@ -32,12 +33,13 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     private String mNameEdt;
     private CheckBox mBoyCkBox;
     private CheckBox mGirlCkBox;
-    private String mStuNumEdt;
+    private String mStuNumEdt="";
     private String mMajorEdt;
     private String mGradeEdt;
-    private String mPhoneEdt;
+    private String mQqEdt;
     private String mGender;
     private String mDirection;
+
     private RadioButton mAndroidBtn;
     private RadioButton mWebBtn;
     private RadioButton mJavaBtn;
@@ -49,6 +51,11 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
     private RadioGroup mWebDataRgp;
     private RadioGroup mJavaAndroidRap;
+    private TextInputLayout mNameTextLay;
+    private TextInputLayout mStuNumTextLay;
+    private TextInputLayout mMajorTextLay;
+    private TextInputLayout mGradeTextLay;
+    private TextInputLayout mQQTextLay;
     private boolean isChecked = false;
 
     @Override
@@ -68,7 +75,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         editTex2 = view.findViewById(R.id.student_number_editText);
         editText3 = view.findViewById(R.id.major_editText);
         editText4= view.findViewById(R.id.grade_editText);
-        editText5 = view.findViewById(R.id.phone_number_editText);
+        editText5 = view.findViewById(R.id.qq_editText);
 
         mWebDataRgp = view.findViewById(R.id.radioGroup);
         mJavaAndroidRap = view.findViewById(R.id.radioGroup2);
@@ -76,6 +83,12 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mWebBtn = view.findViewById(R.id.android_radioButton);
         mJavaBtn = view.findViewById(R.id.java_radioButton);
         mBigDataBtn = view.findViewById(R.id.big_data_radioButton);
+
+        mNameTextLay = view.findViewById(R.id.name_textInputLayout);
+        mGradeTextLay = view.findViewById(R.id.grade_textInputLayout);
+        mMajorTextLay = view.findViewById(R.id.major_textInputLayout);
+        mStuNumTextLay = view.findViewById(R.id.stu_num_textInputLayout);
+        mQQTextLay = view.findViewById(R.id.qq_textInputLayout);
         mJavaBtn.setOnCheckedChangeListener(this);
         mAndroidBtn.setOnCheckedChangeListener(this);
         mWebBtn.setOnCheckedChangeListener(this);
@@ -103,21 +116,42 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
             switch (v.getId()){
                 case R.id.set_up_button:
                     Log.d("Enroll","点击按钮");
-                    mNameEdt = editText.getText().toString();
-                    mStuNumEdt = editTex2.getText().toString();
-                    mMajorEdt = editText3.getText().toString();
-                    mGradeEdt = editText4.getText().toString();
-                    mPhoneEdt = editText5.getText().toString();
-                    mMySelfEdt = editText6.getText().toString();
+                    mNameTextLay.setErrorEnabled(false);
+                    mQQTextLay.setErrorEnabled(false);
+                    mMajorTextLay.setErrorEnabled(false);
+                    mGradeTextLay.setErrorEnabled(false);
+                    mStuNumTextLay.setErrorEnabled(false);
+                    mNameEdt = editText.getText().toString().trim();
+                    mStuNumEdt = editTex2.getText().toString().trim();
+                    mMajorEdt = editText3.getText().toString().trim();
+                    mGradeEdt = editText4.getText().toString().trim();
+                    mQqEdt = editText5.getText().toString().trim();
+                    mMySelfEdt = editText6.getText().toString().trim();
                     mSetUpBtn.setOnClickListener(this);
-                    Log.d("Edt",mNameEdt);
+                    if(mNameEdt.equals("")){
+                        mNameTextLay.setError("姓名不能为空");
+                    }
+                    if(mQqEdt.equals("")){
+                        mQQTextLay.setError("QQ不能为空");
+                    }
+                    if(mStuNumEdt.equals("")){
+                         mStuNumTextLay.setError("学号不能为空");
+                    }
+                    if(mMajorEdt.equals("")){
+                        mMajorTextLay.setError("专业不能为空");
+                    }
+                    if(mGradeEdt.equals("")){
+                        mGradeTextLay.setError("班级不能为空");
+                    }
+                   /* Log.d("Edt",mNameEdt);
                     Log.d("Edt",mStuNumEdt);
                     Log.d("Edt",mMajorEdt);
                     Log.d("Edt",mGradeEdt);
-                    Log.d("Edt",mPhoneEdt);
+                    Log.d("Edt", mQqEdt);
                     Log.d("Edt",mMySelfEdt);
                     Log.d("Edt",mGender);
-                    Log.d("Edt",mDirection);
+                    Log.d("Edt",mDirection);*/
+
 
                     break;
             }
@@ -184,4 +218,5 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
         }
     }
+
 }
