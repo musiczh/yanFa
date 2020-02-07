@@ -1,6 +1,9 @@
 package com.example.yanfa.ui.fragment;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import com.example.yanfa.MainActivity;
 import com.example.yanfa.R;
 import com.example.yanfa.ui.activity.DetailActivity;
+import com.example.yanfa.widget.NewCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -34,13 +38,15 @@ public class MainFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         setListeners(view);
-
+        setAnimator(view);
 
 
         return view;
     }
 
     private void setListeners(View view){
+
+
         view.findViewById(R.id.imageView_cardView_yanfa).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +92,34 @@ public class MainFragment extends Fragment{
                 startActivityForResult(intent,1);
             }
         });
+    }
+
+    private void setAnimator(View view){
+        NewCardView yanfa = view.findViewById(R.id.cardView_yanfa);
+        NewCardView android = view.findViewById(R.id.cardView_android);
+        NewCardView data = view.findViewById(R.id.cardView_data);
+        NewCardView web = view.findViewById(R.id.cardView_web);
+        NewCardView java = view.findViewById(R.id.cardView_java);
+
+        Animator objectAnimator = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator.setTarget(yanfa);
+        objectAnimator.start();
+
+        Animator objectAnimator1 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator1.setTarget(android);
+        objectAnimator1.start();
+
+        Animator objectAnimator2 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator2.setTarget(web);
+        objectAnimator2.start();
+
+        Animator objectAnimator3 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator3.setTarget(java);
+        objectAnimator3.start();
+
+        Animator objectAnimator4 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator4.setTarget(data);
+        objectAnimator4.start();
     }
 
 

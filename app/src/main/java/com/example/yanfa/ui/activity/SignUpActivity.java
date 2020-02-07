@@ -56,9 +56,15 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
                 phoneNum = String.valueOf(textInputEditTextAccount.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 code = String.valueOf(textInputEditTextCode.getText());
-                if(type==LoginActivity.SIGN_UP)
-                signPresenter.SignUp(phoneNum,password,code);
-                else if (type==LoginActivity.RESET_PASSWORD) signPresenter.resetPassword(phoneNum,password,code);
+                if (phoneNum.length()!=11) textInputEditTextAccount.setError("请输入正确的手机号码");
+                else if (code.length()==0) textInputEditTextPassword.setError("密码不能为空");
+                else if(password.length()==0) textInputEditTextCode.setError("验证码不能为空");
+                else{
+                    if(type==LoginActivity.SIGN_UP)
+                        signPresenter.SignUp(phoneNum,password,code);
+                    else if (type==LoginActivity.RESET_PASSWORD) signPresenter.resetPassword(phoneNum,password,code);
+                }
+
             }
         });
 
@@ -67,6 +73,8 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
             @Override
             public void onClick(View v) {
                 phoneNum = String.valueOf(textInputEditTextAccount.getText());
+                if (phoneNum.length()!=11) textInputEditTextAccount.setError("请输入正确的手机号码");
+                else
                 signPresenter.sendCode(phoneNum);
             }
         });

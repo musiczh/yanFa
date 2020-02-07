@@ -165,11 +165,11 @@
         android:id="@+id/textView_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
+        android:textSize="16sp"
         android:textColor="#1565C0"
         android:text="@string/sign_up"
         android:layout_marginTop="16dp"
-        app:layout_constraintRight_toRightOf="@+id/textInputLayout_password"
+        app:layout_constraintLeft_toLeftOf="@+id/textInputLayout_password"
         app:layout_constraintTop_toBottomOf="@id/button_login"
          />
 

@@ -3,11 +3,14 @@ package com.example.yanfa.ui.activity;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yanfa.ui.fragment.MainFragment;
@@ -37,6 +40,11 @@ public class DetailActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView_detail_introduction);
         FloatingActionButton floatingActionButton = findViewById(R.id.fab);
 
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(floatingActionButton,
+                "translationY",-500,0);
+        objectAnimator.setDuration(1500);
+        objectAnimator.setInterpolator(new BounceInterpolator());
+        objectAnimator.start();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

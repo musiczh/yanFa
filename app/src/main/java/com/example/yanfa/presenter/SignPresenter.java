@@ -73,7 +73,7 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
 
                 @Override
                 public void onFail(Object result) {
-                    getView().showToast("登录失败，请重新登录");
+                    getView().showToast("登录失败，请再点击登录尝试");
                     getView().closeProgressBar();
                 }
             });

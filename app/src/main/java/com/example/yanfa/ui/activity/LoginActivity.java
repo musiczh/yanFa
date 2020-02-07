@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
             }
         });
 
-        //注册按钮设置点击事件监听
+        //去注册按钮设置点击事件监听
         TextView textViewSignUp = findViewById(R.id.textView_sign_up);
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +128,10 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
                 phoneNum = String.valueOf(textInputEditTextPhone.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 code = String.valueOf(textInputEditTextCode.getText());
+                if (phoneNum.length()!=11) textInputEditTextPhone.setError("请输入正确的手机号码");
+                else if (code.length()==0) textInputEditTextPassword.setError("密码不能为空");
+                else if(password.length()==0) textInputEditTextCode.setError("验证码不能为空");
+                else
                 presenter.Login(phoneNum,password,code);
             }
         });
