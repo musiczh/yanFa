@@ -7,9 +7,7 @@
     <!--设置圆角-->
     <corners android:radius="40dip" />
 
-    <padding
-    android:bottom="4dp"
-    />
+
     <!--设置边框线的宽度和颜色-->
 <!--    <stroke android:width="3dp" android:color="@color/colorMain" />-->
 </shape>

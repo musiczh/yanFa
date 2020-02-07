@@ -3,18 +3,27 @@ package com.example.yanfa.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.yanfa.R;
 import com.example.yanfa.interfaces.LoginUIInter;
-import com.example.yanfa.presentor.SignPresenter;
+import com.example.yanfa.presenter.SignPresenter;
 import com.google.android.material.textfield.TextInputEditText;
+
+import static com.example.yanfa.util.URLStaticQuality.BASE_URL;
+import static com.example.yanfa.util.URLStaticQuality.LOGIN_IMAGE_CODE;
 
 /**
  * 登录相关的activity
@@ -25,8 +34,12 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
 
     private String phoneNum;
     private String password;
+    private String code;
 
+    private ImageView imageViewCode;
     private ProgressBar progressBar ;
+
+    private TextView textView_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +54,48 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
         final SignPresenter presenter = new SignPresenter();
         presenter.attachView(this);
 
+        textView_code = findViewById(R.id.textView_code);
+
         progressBar = findViewById(R.id.LoginProgressBar);
+
+        final TextInputEditText textInputEditTextPhone = findViewById(R.id.textInputEditText_account);
+        final TextInputEditText textInputEditTextPassword = findViewById(R.id.textInputEditText_password);
+        final TextInputEditText textInputEditTextCode = findViewById(R.id.textInputEditText_code);
+
+        imageViewCode = findViewById(R.id.imageView_code);
+
+        imageViewCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNum = String.valueOf(textInputEditTextPhone.getText());
+                if (phoneNum.length()==11) {
+                    presenter.setImageViewCode(phoneNum);
+
+                }
+                else showToast("请输入正确的手机号");
+            }
+        });
+
+        textInputEditTextPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String phoneNum = String.valueOf(s);
+                if (phoneNum.length()==11)
+                presenter.setImageViewCode(phoneNum);
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         //注册按钮设置点击事件监听
         TextView textViewSignUp = findViewById(R.id.textView_sign_up);
@@ -55,27 +109,26 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
         });
 
         //忘记密码按钮设置点击事件
-        TextView textViewForget = findViewById(R.id.textView_forget);
-        textViewForget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                intent.putExtra("type",RESET_PASSWORD);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        TextView textViewForget = findViewById(R.id.textView_forget);
+//        textViewForget.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+//                intent.putExtra("type",RESET_PASSWORD);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         //登录按钮设置点击事件
         Button buttonLogin = findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText textInputEditTextPhone = findViewById(R.id.textInputEditText_account);
-                TextInputEditText textInputEditTextPassword = findViewById(R.id.textInputEditText_password);
                 phoneNum = String.valueOf(textInputEditTextPhone.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
-                presenter.Login(phoneNum,password);
+                code = String.valueOf(textInputEditTextCode.getText());
+                presenter.Login(phoneNum,password,code);
             }
         });
 
@@ -95,6 +148,20 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
     @Override
     public void showToast(String toastString) {
         Toast.makeText(this,toastString,Toast.LENGTH_SHORT).show();
+        if (toastString!=null&&toastString.equals("登录成功")){
+
+            setResult(2);
+            this.finish();
+        }
+    }
+
+
+
+    @Override
+    public void setCodeImageView(Bitmap bitmap) {
+        imageViewCode.setImageBitmap(bitmap);
+        if (textView_code.getVisibility()==View.VISIBLE)
+            textView_code.setVisibility(View.GONE);
     }
 
 }

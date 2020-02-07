@@ -2,8 +2,7 @@ package com.example.yanfa.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.yanfa.R;
 import com.example.yanfa.interfaces.LoginUIInter;
-import com.example.yanfa.presentor.SignPresenter;
+import com.example.yanfa.presenter.SignPresenter;
 import com.google.android.material.textfield.TextInputEditText;
 
 /**
@@ -86,5 +85,11 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
     @Override
     public void showToast(String toastString) {
         Toast.makeText(this,toastString,Toast.LENGTH_SHORT).show();
+        if (toastString.equals("注册成功")) this.finish();
+    }
+
+    @Override
+    public void setCodeImageView(Bitmap bitmap) {
+        //注册页面不需要图片验证码
     }
 }
