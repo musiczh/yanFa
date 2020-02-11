@@ -2,8 +2,7 @@ package com.example.yanfa.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.yanfa.R;
 import com.example.yanfa.interfaces.LoginUIInter;
-import com.example.yanfa.presentor.SignPresenter;
+import com.example.yanfa.presenter.SignPresenter;
 import com.google.android.material.textfield.TextInputEditText;
 
 /**
@@ -57,9 +56,15 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
                 phoneNum = String.valueOf(textInputEditTextAccount.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 code = String.valueOf(textInputEditTextCode.getText());
-                if(type==LoginActivity.SIGN_UP)
-                signPresenter.SignUp(phoneNum,password,code);
-                else if (type==LoginActivity.RESET_PASSWORD) signPresenter.resetPassword(phoneNum,password,code);
+                if (phoneNum.length()!=11) textInputEditTextAccount.setError("请输入正确的手机号码");
+                else if (code.length()==0) textInputEditTextPassword.setError("密码不能为空");
+                else if(password.length()==0) textInputEditTextCode.setError("验证码不能为空");
+                else{
+                    if(type==LoginActivity.SIGN_UP)
+                        signPresenter.SignUp(phoneNum,password,code);
+                    else if (type==LoginActivity.RESET_PASSWORD) signPresenter.resetPassword(phoneNum,password,code);
+                }
+
             }
         });
 
@@ -68,6 +73,8 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
             @Override
             public void onClick(View v) {
                 phoneNum = String.valueOf(textInputEditTextAccount.getText());
+                if (phoneNum.length()!=11) textInputEditTextAccount.setError("请输入正确的手机号码");
+                else
                 signPresenter.sendCode(phoneNum);
             }
         });
@@ -86,5 +93,11 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
     @Override
     public void showToast(String toastString) {
         Toast.makeText(this,toastString,Toast.LENGTH_SHORT).show();
+        if (toastString.equals("注册成功")) this.finish();
+    }
+
+    @Override
+    public void setCodeImageView(Bitmap bitmap) {
+        //注册页面不需要图片验证码
     }
 }

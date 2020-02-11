@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,18 +19,29 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.yanfa.bean.EnrollBean;
+import com.example.yanfa.bean.Result;
+import com.example.yanfa.iApiService.EnrollApiService;
 import com.example.yanfa.ui.activity.LoginActivity;
+import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.widget.DrawerLayoutNoSlidingConflict;
 import com.google.android.material.navigation.NavigationView;
 import java.lang.reflect.Field;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
  /**
   * MainActivity
   */
  public class MainActivity extends AppCompatActivity {
      private AppBarConfiguration appBarConfiguration;
+     private static Context mContext;
+     TextView textViewRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,8 @@ import java.util.Objects;
             MainActivity.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.activity_main);
+
+        mContext = this;
 
         //设置toolbar
         Toolbar toolbar = findViewById(R.id.toolBar_main);
@@ -64,16 +78,19 @@ import java.util.Objects;
 
         //登录文字监听
         View view = navigationView.getHeaderView(0);
-        TextView textView1 = view.findViewById(R.id.textView_header_layout);
-        textView1.setOnClickListener(new View.OnClickListener() {
+        textViewRegister = view.findViewById(R.id.textView_header_layout);
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,0);
             }
         });
 
+        //判断是否已经登录了
+//        haveLogin();
     }
+
 
 
      @Override
@@ -112,6 +129,7 @@ import java.util.Objects;
          }
      }
 
+     //详情页面点击报名按钮跳转报名界面
      public void turn_enroll(){
         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
         navController.navigate(R.id.nav_enroll);
@@ -121,5 +139,28 @@ import java.util.Objects;
      protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
          if (resultCode == 1) turn_enroll();
+         if (resultCode == 2) textViewRegister.setText("已登录");
+     }
+
+//     //判断是否已经登录了；或者是否cookie已经过期
+//     private void haveLogin(){
+//         RetrofitManager.getInstance().createRs(EnrollApiService.class)
+//                 .enroll(new EnrollBean())
+//                 .enqueue(new Callback<Result>() {
+//                     @Override
+//                     public void onResponse(Call<Result> call, Response<Result> response) {
+//                         if (response.body()==null) textViewRegister.setText("去登陆");
+//                         else textViewRegister.setText("已登录");
+//                     }
+//
+//                     @Override
+//                     public void onFailure(Call<Result> call, Throwable t) {
+//                         Toast.makeText(MainActivity.this,"网络错误，请检查网络",Toast.LENGTH_SHORT).show();
+//                     }
+//                 });
+//     }
+
+     public static Context getContext(){
+        return mContext;
      }
  }

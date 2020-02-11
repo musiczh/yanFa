@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:maxLength="6"
+            android:maxLength="4"
             android:hint="@string/verification_code"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp" />
