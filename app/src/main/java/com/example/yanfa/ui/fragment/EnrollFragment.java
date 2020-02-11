@@ -129,19 +129,19 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     mMySelfEdt = editText6.getText().toString().trim();
                     mSetUpBtn.setOnClickListener(this);
                     if(mNameEdt.equals("")){
-                        mNameTextLay.setError("姓名不能为空");
+                        mNameTextLay.setError("内容不能为空");
                     }
                     if(mQqEdt.equals("")){
-                        mQQTextLay.setError("QQ不能为空");
+                        mQQTextLay.setError("内容不能为空");
                     }
                     if(mStuNumEdt.equals("")){
-                         mStuNumTextLay.setError("学号不能为空");
+                         mStuNumTextLay.setError("内容不能为空");
                     }
                     if(mMajorEdt.equals("")){
-                        mMajorTextLay.setError("专业不能为空");
+                        mMajorTextLay.setError("内容不能为空");
                     }
                     if(mGradeEdt.equals("")){
-                        mGradeTextLay.setError("班级不能为空");
+                        mGradeTextLay.setError("内容不能为空");
                     }
                    /* Log.d("Edt",mNameEdt);
                     Log.d("Edt",mStuNumEdt);
