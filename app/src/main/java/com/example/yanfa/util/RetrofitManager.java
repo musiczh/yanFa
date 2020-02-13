@@ -35,7 +35,8 @@ public class RetrofitManager {
 
         ClearableCookieJar cookieJar =
                 new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MainActivity.getContext()));
-        httpClientBuilder.cookieJar(cookieJar);
+        httpClientBuilder.addInterceptor(new ReceivedCookiesInterceptor(MainActivity.getContext()));
+        httpClientBuilder.addInterceptor(new AddCookiesInterceptor(MainActivity.getContext()));
 
 
         mRetrofit = new Retrofit.Builder()
