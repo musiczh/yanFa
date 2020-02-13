@@ -71,7 +71,7 @@
             app:cardElevation="2dp">
             <TextView
                 android:id="@+id/textView_detail_introduction"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
