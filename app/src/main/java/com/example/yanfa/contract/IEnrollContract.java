@@ -1,22 +1,24 @@
 package com.example.yanfa.contract;
 
+import com.example.yanfa.bean.EnrollBean;
+
+import retrofit2.http.Body;
+
 /**
  * 报名界面的Contract层
  */
 public class IEnrollContract {
     public interface  IView<T>{
-        void onFailure();
-        void onSuccess();
+        void onFailure(String str);
+        void onSuccess(String str);
     }
     public interface  IPresenter<T>{
-        void onSuccess();
-        void onFailure();
+        void onFailure(String str);
+        void onSuccess(String str);
 
-        void setUp(String name,String gender,String studentNumber,String major,String grade,
-                   String phoneNumber,String direction,String mySelf);
+        void  enroll(EnrollBean enrollBean);
     }
     public interface IModel{
-        void setUp(String name,String gender,String studentNumber,String major,String grade,
-                   String phoneNumber,String direction,String mySelf);
+        void  enroll(EnrollBean enrollBean);
     }
 }
