@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
         buttonSendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 phoneNum = String.valueOf(textInputEditTextAccount.getText());
                 if (phoneNum.length()!=11) textInputEditTextAccount.setError("请输入正确的手机号码");
                 else

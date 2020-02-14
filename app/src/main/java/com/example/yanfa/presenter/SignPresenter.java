@@ -1,15 +1,17 @@
 package com.example.yanfa.presenter;
 
 import android.graphics.Bitmap;
-
 import com.example.yanfa.bean.RegLoginInfo;
-import com.example.yanfa.iApiService.RegisterDoApiService;
 import com.example.yanfa.interfaces.BasePresentor;
 import com.example.yanfa.interfaces.LoginPresentorInter;
 import com.example.yanfa.interfaces.LoginUIInter;
 import com.example.yanfa.interfaces.ModelCallBack;
 import com.example.yanfa.model.SignModel;
 
+/**
+ * 登录注册界面的presenter
+ * 提供发送验证码，登录，注册等的逻辑
+ */
 public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginPresentorInter {
     private SignModel mSignModel = new SignModel();
     private boolean ifCanSendCode = true;
@@ -106,24 +108,24 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
 
     @Override
     public void resetPassword(String phoneNum, String password, String code) {
-        if(correctData(phoneNum,password)){
 
-        }
     }
 
     @Override
     public void setImageViewCode(String phoneNum) {
+        getView().showProgressBar();
         mSignModel.loginGetCode(phoneNum, new ModelCallBack() {
             @Override
             public void onSucceed(Object result) {
                 Bitmap bitmap = (Bitmap)result;
                 getView().setCodeImageView(bitmap);
+                getView().closeProgressBar();
             }
 
             @Override
             public void onFail(Object result) {
-                //getView().showToast("获取验证码失败，请点击验证码重新获取");
-                getView().showToast((String)result);
+                getView().showToast("获取验证码失败，请点击验证码重新获取");
+                getView().closeProgressBar();
             }
         });
     }
