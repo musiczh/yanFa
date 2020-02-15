@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,11 +25,19 @@ import android.widget.Toast;
 
 import com.example.yanfa.R;
 import com.example.yanfa.bean.EnrollBean;
+import com.example.yanfa.bean.Result;
 import com.example.yanfa.contract.IEnrollContract;
+import com.example.yanfa.iApiService.EnrollApiService;
+import com.example.yanfa.iApiService.IfEnrollApiService;
 import com.example.yanfa.presenter.EnrollBasePresenter;
 import com.example.yanfa.presenter.EnrollPresenter;
+import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.util.ToastUtils;
 import com.google.android.material.textfield.TextInputLayout;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -67,8 +77,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
     private EnrollBean mEnrollBean;
     private ProgressBar mProgressBar;
-    private boolean sexFlag = false;
-    private boolean directionFlag = false;
+    private boolean sexFlag = false;  //是否选择性别
+    private boolean directionFlag = false; //是否选择方向
+    private boolean enrollFalg = false; //电话号码是否报名过
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -121,6 +132,8 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mGirlCkBox.setOnCheckedChangeListener(this);
 
         mEnrollBean = new EnrollBean();
+        mPresenter = new EnrollPresenter();
+        mPresenter.attachView(this);
 
     }
     @Override
@@ -226,6 +239,8 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     }
                     if(mStuNumEdt.equals("")){
                          mStuNumTextLay.setError("内容不能为空");
+                    }else if(mStuNumEdt.length()!=10){
+                        mStuNumTextLay.setError("请输入正确的学号");
                     }else {
                         mEnrollBean.setSno(mStuNumEdt);
                     }
@@ -245,7 +260,6 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         mEnrollBean.setFaculty(mFacultyEdt);
                     }
 
-                    mEnrollBean.setOpenid("");
                     mEnrollBean.setSelfIntroduction(mMySelfEdt);
 
 
@@ -257,12 +271,14 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     }
 
                     //若内容全有则可报名
-                    if(!(mStuNumEdt.equals("")||mGradeEdt.equals("")||mMajorEdt.equals("")
+                    if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
                             &&mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
-                        mPresenter = new EnrollPresenter();
-                        ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
-                        mProgressBar.setVisibility(View.VISIBLE);
-                        mSetUpBtn.setVisibility(View.INVISIBLE);
+
+
+                            ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
+                            mProgressBar.setVisibility(View.VISIBLE);
+                            mSetUpBtn.setVisibility(View.INVISIBLE);
+
                     }
 
                     break;
@@ -289,13 +305,34 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         dialogBox();
     }
 
-    //弹出对话框
+    //弹出报名成功对话框
     private void dialogBox() {
         AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
         bb.setMessage("报名成功！");
         bb.setTitle("提示");
         bb.setCancelable(true);
-        bb.setPositiveButton("查看考核", new DialogInterface.OnClickListener() {
+        bb.setPositiveButton("返回主界面", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        bb.show();
+    }
+    //弹出报名过对话框
+    private void dialogBox2() {
+        AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
+        bb.setMessage("你已经报名过了，是否重新报名");
+        bb.setTitle("提示");
+        bb.setCancelable(true);
+        bb.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        bb.setPositiveButton("报名", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -305,6 +342,29 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         bb.show();
     }
 
+    //判断电话号码是否报名过
+    public boolean ifAlreadyEnroll(String phoneNum){
+        RetrofitManager.getInstance().createRs(IfEnrollApiService.class)
+                .ifEnroll(phoneNum)
+                .enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        if(response.body().getResult().equals("ok")){
+                            enrollFalg = true;
+                        }else {
+                            enrollFalg = false;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+                        ToastUtils.showToast(getActivity(),"网络似乎出了点小问题哦");
+                    }
+                });
+        return enrollFalg;
+    }
 
 
 }

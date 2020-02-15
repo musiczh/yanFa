@@ -19,6 +19,9 @@ public class URLStaticQuality {
     //报名的附加地址
     public static final String ENROLL_DO = "/recruitment/commit/do";
 
+    //查看是否报名附加地址
+    public static final String IF_ENROLL_DO = "/recruitment/commit/alreadyInPhone";
+
     //通知的附加地址
     public static final String NOTICE = "/recruit/result/notice";
 }
