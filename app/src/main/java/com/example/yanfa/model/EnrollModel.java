@@ -30,9 +30,11 @@ public class EnrollModel implements IEnrollContract.IModel {
                 .enqueue(new Callback<Result>() {
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
+                        if(response.body()!=null){
+                            mPresenter.onSuccess(response.body().getResult());
+                            Log.d("model",response.body().getResult());
+                        }
 
-                        Log.d("model","报名成功");
-                        mPresenter.onSuccess("");
                     }
 
                     @Override

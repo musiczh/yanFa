@@ -2,6 +2,7 @@ package com.example.yanfa.ui.fragment;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -32,6 +33,7 @@ import com.example.yanfa.iApiService.EnrollApiService;
 import com.example.yanfa.iApiService.IfEnrollApiService;
 import com.example.yanfa.presenter.EnrollBasePresenter;
 import com.example.yanfa.presenter.EnrollPresenter;
+import com.example.yanfa.util.NetworkUtil;
 import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.util.ToastUtils;
 import com.google.android.material.textfield.TextInputLayout;
@@ -77,11 +79,12 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     private TextInputLayout mFacultyLay;
 
     private EnrollBean mEnrollBean;
-    private ProgressBar mProgressBar;
+//    private ProgressBar mProgressBar;
     private boolean sexFlag = false;  //是否选择性别
     private boolean directionFlag = false; //是否选择方向
     private boolean enrollFalg = false; //电话号码是否报名过
     private MainActivity mainActivity;
+    private ProgressDialog pd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -118,7 +121,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mQQTextLay = view.findViewById(R.id.qq_textInputLayout);
         mFacultyLay = view.findViewById(R.id.faculty_textInputLayout);
 
-        mProgressBar = view.findViewById(R.id.progressBar);
+//        mProgressBar = view.findViewById(R.id.progressBar);
 
         mJavaBtn.setOnCheckedChangeListener(this);
         mAndroidBtn.setOnCheckedChangeListener(this);
@@ -138,6 +141,11 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mEnrollBean = new EnrollBean();
         mPresenter = new EnrollPresenter();
         mPresenter.attachView(this);
+        Log.d("1","1"+mainActivity.getPhoneNum());
+
+        pd=new ProgressDialog(getContext());
+        pd.setMessage("正在上传...");
+
 
     }
     @Override
@@ -276,21 +284,27 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     }
 
 
+
+                    //先判断有没有网络
+                    if (!NetworkUtil.isNetworkAvailable(getContext())){
+
+                        ToastUtils.showToast(getActivity(),"网络不可用");
                         //若内容全有则可报名
-                    if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
+                    }else if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
                             &&mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
 
-
                         //点击报名首先判断登录，登录状态才能继续下列操作
-                        if(!mainActivity.getIfLogin()){
-                            dialogBox2();      //若没有登录则先登录
-                        }else {
-                            ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
-                            mProgressBar.setVisibility(View.VISIBLE);
-                            mSetUpBtn.setVisibility(View.INVISIBLE);
+                            if(!mainActivity.getIfLogin()){
+                                 dialogBox2();      //若没有登录则先登录
+                       //     }else if(ifAlreadyEnroll(mainActivity.getPhoneNum())) {   //判断号码是否登录过，登录过弹出dialog
+                           //     dialogBox3();
+                            } else{
+                                ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
+//                                mProgressBar.setVisibility(View.VISIBLE);
+//                                mSetUpBtn.setVisibility(View.INVISIBLE);
+                                pd.show();
+                            }
                         }
-                    }
-
                     break;
             }
 
@@ -310,8 +324,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     @Override
     public void onSuccess(String str) {
         Log.d("fragment",str);
-        mSetUpBtn.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
+//        mSetUpBtn.setVisibility(View.VISIBLE);
+//        mProgressBar.setVisibility(View.GONE);
+        pd.dismiss();
         dialogBox();
     }
 
@@ -361,11 +376,20 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         bb.setPositiveButton("报名", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
+//                mProgressBar.setVisibility(View.VISIBLE);
+//                mSetUpBtn.setVisibility(View.INVISIBLE);
             }
         });
 
         bb.show();
+    }
+
+    //缓冲的dialog
+    public void circleDialog(){
+        ProgressDialog pd=new ProgressDialog(getContext());
+        pd.setMessage("正在上传...");
+        pd.show();
     }
 
     //判断电话号码是否报名过

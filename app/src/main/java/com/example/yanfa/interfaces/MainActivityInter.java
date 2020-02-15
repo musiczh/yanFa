@@ -12,4 +12,7 @@ public interface MainActivityInter {
 
     //获取是否已经登录；true已登录，false未登录
      boolean getIfLogin();
+
+     //获取手机登录手机号码.返回为null即为未登录成功
+    String getPhoneNum();
 }
