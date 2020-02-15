@@ -303,6 +303,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 //                                mProgressBar.setVisibility(View.VISIBLE);
 //                                mSetUpBtn.setVisibility(View.INVISIBLE);
                                 pd.show();
+                                pd.setCanceledOnTouchOutside(false);
                             }
                         }
                     break;
@@ -342,7 +343,14 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 mainActivity.backFragment();
             }
         });
+        bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+
+        bb.setCancelable(false);
         bb.show();
     }
 
@@ -373,7 +381,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
             }
         });
-        bb.setPositiveButton("报名", new DialogInterface.OnClickListener() {
+        bb.setNegativeButton("报名", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
