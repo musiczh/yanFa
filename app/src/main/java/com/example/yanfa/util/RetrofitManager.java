@@ -1,11 +1,6 @@
 package com.example.yanfa.util;
 
 import com.example.yanfa.MainActivity;
-import com.example.yanfa.R;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,8 +28,6 @@ public class RetrofitManager {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(15, TimeUnit.SECONDS);
 
-        ClearableCookieJar cookieJar =
-                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MainActivity.getContext()));
         httpClientBuilder.addInterceptor(new ReceivedCookiesInterceptor(MainActivity.getContext()));
         httpClientBuilder.addInterceptor(new AddCookiesInterceptor(MainActivity.getContext()));
 

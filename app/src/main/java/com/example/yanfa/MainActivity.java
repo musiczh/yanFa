@@ -27,6 +27,7 @@ import com.example.yanfa.bean.EnrollBean;
 import com.example.yanfa.bean.Result;
 import com.example.yanfa.iApiService.EnrollApiService;
 import com.example.yanfa.iApiService.NoticeApiService;
+import com.example.yanfa.interfaces.MainActivityInter;
 import com.example.yanfa.ui.activity.LoginActivity;
 import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.widget.DrawerLayoutNoSlidingConflict;
@@ -41,7 +42,7 @@ import retrofit2.Response;
  /**
   * MainActivity
   */
- public class MainActivity extends AppCompatActivity {
+ public class MainActivity extends AppCompatActivity implements MainActivityInter {
      private AppBarConfiguration appBarConfiguration;
      private static Context mContext;
      TextView textViewRegister;
@@ -92,18 +93,28 @@ import retrofit2.Response;
         });
 
         //判断是否已经登录
-        Intent intent = getIntent();
-        if (intent.getBooleanExtra("ifLogin",false)) textViewRegister.setText("已登录");
+        if (getIfLogin()) textViewRegister.setText("已登录");
     }
 
+    @Override
     public void goLogin(){
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivityForResult(intent,0);
     }
 
+     @Override
+     public void backFragment() {
+         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+         navController.navigateUp();
+     }
+
+     @Override
+     public boolean getIfLogin() {
+         return getIntent().getBooleanExtra("ifLogin",false);
+     }
 
 
-    //标题栏
+     //标题栏
      @Override
      public boolean onSupportNavigateUp() {
          NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
@@ -144,6 +155,7 @@ import retrofit2.Response;
      public void turn_enroll(){
         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
         navController.navigate(R.id.nav_enroll);
+
      }
 
      @Override

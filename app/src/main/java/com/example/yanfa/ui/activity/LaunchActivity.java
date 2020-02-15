@@ -21,11 +21,7 @@ import com.example.yanfa.bean.BaseBean;
 import com.example.yanfa.iApiService.NoticeApiService;
 import com.example.yanfa.util.AddCookiesInterceptor;
 import com.example.yanfa.util.ReceivedCookiesInterceptor;
-import com.example.yanfa.util.RetrofitManager;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
 
 import java.util.concurrent.TimeUnit;
 
