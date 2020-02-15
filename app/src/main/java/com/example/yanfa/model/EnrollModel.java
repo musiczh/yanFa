@@ -32,7 +32,7 @@ public class EnrollModel implements IEnrollContract.IModel {
                     public void onResponse(Call<Result> call, Response<Result> response) {
 
                         Log.d("model","报名成功");
-                        mPresenter.onSuccess(response.body().getResult().toString());
+                        mPresenter.onSuccess("");
                     }
 
                     @Override

@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.yanfa.MainActivity;
 import com.example.yanfa.R;
 import com.example.yanfa.bean.EnrollBean;
 import com.example.yanfa.bean.Result;
@@ -80,6 +81,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     private boolean sexFlag = false;  //是否选择性别
     private boolean directionFlag = false; //是否选择方向
     private boolean enrollFalg = false; //电话号码是否报名过
+    private MainActivity mainActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,6 +132,8 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
         mBoyCkBox.setOnCheckedChangeListener(this);
         mGirlCkBox.setOnCheckedChangeListener(this);
+
+         mainActivity = (MainActivity) getActivity();
 
         mEnrollBean = new EnrollBean();
         mPresenter = new EnrollPresenter();
@@ -210,7 +214,8 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     public void onClick(View v) {
             switch (v.getId()){
                 case R.id.set_up_button:
-                    Log.d("Enroll","点击按钮");
+
+
                     mNameTextLay.setErrorEnabled(false);
                     mQQTextLay.setErrorEnabled(false);
                     mMajorTextLay.setErrorEnabled(false);
@@ -270,15 +275,20 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         ToastUtils.showToast(getActivity(),"请选择你报名的方向");
                     }
 
-                    //若内容全有则可报名
+
+                        //若内容全有则可报名
                     if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
                             &&mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
 
 
+                        //点击报名首先判断登录，登录状态才能继续下列操作
+                        if(!mainActivity.getIfLogin()){
+                            dialogBox2();      //若没有登录则先登录
+                        }else {
                             ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
                             mProgressBar.setVisibility(View.VISIBLE);
                             mSetUpBtn.setVisibility(View.INVISIBLE);
-
+                        }
                     }
 
                     break;
@@ -314,14 +324,30 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         bb.setPositiveButton("返回主界面", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mainActivity.backFragment();
+            }
+        });
 
+        bb.show();
+    }
+
+    //弹出去登陆对话框
+    private void dialogBox2() {
+        AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
+        bb.setMessage("请先登录");
+        bb.setTitle("提示");
+        bb.setCancelable(true);
+        bb.setPositiveButton("去登陆", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               mainActivity.goLogin();
             }
         });
 
         bb.show();
     }
     //弹出报名过对话框
-    private void dialogBox2() {
+    private void dialogBox3() {
         AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
         bb.setMessage("你已经报名过了，是否重新报名");
         bb.setTitle("提示");
