@@ -155,6 +155,8 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
         if (toastString!=null&&toastString.equals("登录成功")){
 
             setResult(2);
+            Intent intent = new Intent();
+            intent.putExtra("phoneNum",phoneNum);
             this.finish();
         }
     }

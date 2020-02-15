@@ -45,8 +45,10 @@ import retrofit2.Response;
  public class MainActivity extends AppCompatActivity implements MainActivityInter {
      private AppBarConfiguration appBarConfiguration;
      private static Context mContext;
+     private String phoneNum = null;
+     private boolean ifLogin = false;
      TextView textViewRegister;
-     ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,8 @@ import retrofit2.Response;
         });
 
         //判断是否已经登录
-        if (getIfLogin()) textViewRegister.setText("已登录");
+        ifLogin = getIntent().getBooleanExtra("ifLogin",false);
+        if (ifLogin) textViewRegister.setText("已登录");
     }
 
     @Override
@@ -110,7 +113,14 @@ import retrofit2.Response;
 
      @Override
      public boolean getIfLogin() {
-         return getIntent().getBooleanExtra("ifLogin",false);
+         return ifLogin;
+     }
+
+     @Override
+     public String getPhoneNum() {
+        if (phoneNum!=null)
+         return phoneNum;
+        else return null;
      }
 
 
@@ -162,7 +172,13 @@ import retrofit2.Response;
      protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
          if (resultCode == 1) turn_enroll();
-         if (resultCode == 2) textViewRegister.setText("已登录");
+         if (resultCode == 2) {
+             textViewRegister.setText("已登录");
+             ifLogin = true;
+             if (data != null) {
+                 phoneNum = data.getStringExtra("phoneNum");
+             }
+         }
      }
 
 
