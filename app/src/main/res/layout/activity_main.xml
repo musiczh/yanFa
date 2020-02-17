@@ -19,7 +19,7 @@
         android:id="@+id/navigationView_main"
         android:layout_gravity="start"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:background="@color/colorCardTransparent"
+        android:background="#a0000000"
         app:menu="@menu/nav_menu"
         app:headerLayout="@layout/header_layout"
         />

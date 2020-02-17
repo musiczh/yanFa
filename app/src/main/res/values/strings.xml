@@ -44,8 +44,10 @@
     <string name="boy">"男"</string>
     <string name="girl">"女"</string>
     <string name="student_number">"学号:"</string>
+    <string name="faculty">"学院:"</string>
     <string name="major">"专业:"</string>
     <string name="grade">"班级:"</string>
+    <string name="qq">"QQ:"</string>
     <string name="phone_number">"手机号码:"</string>
     <string name="direction">"报名方向:"</string>
     <string name="java">"后台"</string>
@@ -60,6 +62,8 @@
     <string name="join_yanfa">加入研发中心</string>
     <string name="yanfa_name">RDC研发中心</string>
     
+
+
 
 
 
