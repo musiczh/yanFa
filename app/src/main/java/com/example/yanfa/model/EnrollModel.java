@@ -6,6 +6,7 @@ import com.example.yanfa.bean.EnrollBean;
 import com.example.yanfa.bean.Result;
 import com.example.yanfa.contract.IEnrollContract;
 import com.example.yanfa.iApiService.EnrollApiService;
+import com.example.yanfa.iApiService.IfEnrollApiService;
 import com.example.yanfa.util.RetrofitManager;
 
 import retrofit2.Call;
@@ -43,5 +44,27 @@ public class EnrollModel implements IEnrollContract.IModel {
                     }
                 });
 
+    }
+
+    @Override
+    public void goIfEnroll(String phoneStum) {
+        RetrofitManager.getInstance().createRs(IfEnrollApiService.class)
+                .ifEnroll(phoneStum)
+                .enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        Log.d("ifEnrollmodel","--"+response.body().getResult());
+                        if(response.body()!=null)
+                            if(response.body().getResult().equals("ok")){
+                                mPresenter.ifEnroll(true);
+                            }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+                        mPresenter.ifEnroll(false);
+                    }
+                });
     }
 }

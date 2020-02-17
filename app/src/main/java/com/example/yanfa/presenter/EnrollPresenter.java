@@ -26,6 +26,13 @@ public class EnrollPresenter extends EnrollBasePresenter<IEnrollContract.IView> 
     }
 
     @Override
+    public void ifEnroll(boolean flag) {
+        if(isAttachView()){
+            getMvpView().ifEnroll(flag);
+        }
+    }
+
+    @Override
     public void onFailure(String str) {
         if(isAttachView()){
             getMvpView().onFailure(str);
@@ -35,5 +42,10 @@ public class EnrollPresenter extends EnrollBasePresenter<IEnrollContract.IView> 
     @Override
     public void enroll(EnrollBean enrollBean) {
         mModel.enroll(enrollBean);
+    }
+
+    @Override
+    public void goIfEnroll(String phoneStum) {
+        mModel.goIfEnroll(phoneStum);
     }
 }

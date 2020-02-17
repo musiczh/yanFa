@@ -147,6 +147,16 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         pd.setMessage("正在上传...");
 
 
+        if (!NetworkUtil.isNetworkAvailable(getContext())){
+
+            ToastUtils.showToast(getActivity(),"网络不可用");
+
+        }else{
+            ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
+        }
+
+
+
     }
     @Override
     public void onDestroyView() {
@@ -285,6 +295,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
 
 
+                    Log.d("测试","----"+enrollFalg);
                     //先判断有没有网络
                     if (!NetworkUtil.isNetworkAvailable(getContext())){
 
@@ -296,8 +307,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         //点击报名首先判断登录，登录状态才能继续下列操作
                             if(!mainActivity.getIfLogin()){
                                  dialogBox2();      //若没有登录则先登录
-                       //     }else if(ifAlreadyEnroll(mainActivity.getPhoneNum())) {   //判断号码是否登录过，登录过弹出dialog
-                           //     dialogBox3();
+                            }else if(enrollFalg) {   //判断号码是否登录过，登录过弹出dialog
+                              Log.d("报名过","if内");
+                                dialogBox3();
                             } else{
                                 apply();
                             }
@@ -325,6 +337,12 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 //        mProgressBar.setVisibility(View.GONE);
         pd.dismiss();
         dialogBox();
+    }
+
+    @Override
+    public void ifEnroll(boolean flag) {
+        Log.d("goIfEnroll","+++"+flag);
+        enrollFalg = flag;
     }
 
     //弹出报名成功对话框
@@ -380,12 +398,10 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         bb.setNegativeButton("报名", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
-//                mProgressBar.setVisibility(View.VISIBLE);
-//                mSetUpBtn.setVisibility(View.INVISIBLE);
+               apply();
             }
         });
-
+        bb.setCancelable(false);
         bb.show();
     }
 
@@ -396,29 +412,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         pd.show();
     }
 
-    //判断电话号码是否报名过
-    public boolean ifAlreadyEnroll(String phoneNum){
-        RetrofitManager.getInstance().createRs(IfEnrollApiService.class)
-                .ifEnroll(phoneNum)
-                .enqueue(new Callback<Result>() {
-                    @Override
-                    public void onResponse(Call<Result> call, Response<Result> response) {
-                        if(response.body().getResult().equals("ok")){
-                            enrollFalg = true;
-                        }else {
-                            enrollFalg = false;
-                        }
 
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Result> call, Throwable t) {
-                        ToastUtils.showToast(getActivity(),"网络似乎出了点小问题哦");
-                    }
-                });
-        return enrollFalg;
-    }
 
     //报名
     public void apply(){
