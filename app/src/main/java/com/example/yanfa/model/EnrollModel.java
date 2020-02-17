@@ -53,7 +53,6 @@ public class EnrollModel implements IEnrollContract.IModel {
                 .enqueue(new Callback<Result>() {
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
-                        Log.d("ifEnrollmodel","--"+response.body().getResult());
                         if(response.body()!=null)
                             if(response.body().getResult().equals("ok")){
                                 mPresenter.ifEnroll(true);
