@@ -299,11 +299,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                        //     }else if(ifAlreadyEnroll(mainActivity.getPhoneNum())) {   //判断号码是否登录过，登录过弹出dialog
                            //     dialogBox3();
                             } else{
-                                ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
-//                                mProgressBar.setVisibility(View.VISIBLE);
-//                                mSetUpBtn.setVisibility(View.INVISIBLE);
-                                pd.show();
-                                pd.setCanceledOnTouchOutside(false);
+                                apply();
                             }
                         }
                     break;
@@ -316,7 +312,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
      */
     @Override
     public void onFailure(String str) {
-
+        ToastUtils.showToast(getActivity(),str);
     }
 
     /**
@@ -423,6 +419,15 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 });
         return enrollFalg;
     }
+
+    //报名
+    public void apply(){
+        ((EnrollPresenter) mPresenter).enroll(mEnrollBean);
+        pd.show();
+        pd.setCanceledOnTouchOutside(false);
+    }
+
+
 
 
 }
