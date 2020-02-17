@@ -96,7 +96,11 @@ import retrofit2.Response;
 
         //判断是否已经登录
         ifLogin = getIntent().getBooleanExtra("ifLogin",false);
-        if (ifLogin) textViewRegister.setText("已登录");
+        if (ifLogin){
+            textViewRegister.setText("已登录");
+            phoneNum = this.getSharedPreferences("user",MODE_PRIVATE)
+                    .getString("phoneNum","0");
+        }
     }
 
     @Override
