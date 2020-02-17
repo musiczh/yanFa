@@ -3,6 +3,7 @@ package com.example.yanfa.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -153,10 +154,14 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
     public void showToast(String toastString) {
         Toast.makeText(this,toastString,Toast.LENGTH_SHORT).show();
         if (toastString!=null&&toastString.equals("登录成功")){
-
-            setResult(2);
             Intent intent = new Intent();
             intent.putExtra("phoneNum",phoneNum);
+            setResult(2,intent);
+
+            SharedPreferences.Editor sharedUser = this.getSharedPreferences("user", MODE_PRIVATE)
+                    .edit();
+            sharedUser.putString("phoneNum", phoneNum);
+            sharedUser.apply();
             this.finish();
         }
     }
