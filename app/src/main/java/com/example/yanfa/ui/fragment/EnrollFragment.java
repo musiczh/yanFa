@@ -151,7 +151,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
             ToastUtils.showToast(getActivity(),"网络不可用");
 
-        }else{
+        }else if(mainActivity.getIfLogin()){  //有登录则判断是否报名过
             ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
         }
 
@@ -233,6 +233,14 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
             switch (v.getId()){
                 case R.id.set_up_button:
 
+
+                    if (!NetworkUtil.isNetworkAvailable(getContext())){
+
+                        ToastUtils.showToast(getActivity(),"网络不可用");
+
+                    }else if(mainActivity.getIfLogin()){  //有登录则判断是否报名过
+                        ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
+                    }
 
                     mNameTextLay.setErrorEnabled(false);
                     mQQTextLay.setErrorEnabled(false);
