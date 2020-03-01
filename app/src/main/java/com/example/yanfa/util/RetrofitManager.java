@@ -1,6 +1,6 @@
 package com.example.yanfa.util;
 
-import com.example.yanfa.R;
+import com.example.yanfa.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +27,10 @@ public class RetrofitManager {
     private RetrofitManager(){
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(15, TimeUnit.SECONDS);
+
+        httpClientBuilder.addInterceptor(new ReceivedCookiesInterceptor(MainActivity.getContext()));
+        httpClientBuilder.addInterceptor(new AddCookiesInterceptor(MainActivity.getContext()));
+
 
         mRetrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())

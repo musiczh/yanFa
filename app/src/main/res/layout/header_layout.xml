@@ -6,6 +6,7 @@
     android:padding="16dp">
 
     <ImageView
+        android:id="@+id/imageView_header_layout"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="40dp"
@@ -16,7 +17,10 @@
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:textSize="15sp"
         android:id="@+id/textView_header_layout"
-        android:text="@string/sign_up"/>
+        android:text="@string/go_login"
+        android:layout_marginStart="4dp" />
 
 </LinearLayout>

@@ -1,44 +1,126 @@
 package com.example.yanfa.ui.fragment;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.yanfa.MainActivity;
 import com.example.yanfa.R;
+import com.example.yanfa.ui.activity.DetailActivity;
+import com.example.yanfa.widget.NewCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * 主界面fragment
  */
-public class MainFragment extends Fragment {
-
-
+public class MainFragment extends Fragment{
+    public static final int ANDROID = 1;
+    public static final int YANFA = 0;
+    public static final int JAVA = 2;
+    public static final int WEB = 3;
+    public static final int DATA = 4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        //悬浮按钮设置监听事件。跳转报名界面
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton_main);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getActivity()!=null) {
-                    NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                    navController.navigate(R.id.action_nav_main_to_nav_enroll);
-                }
-            }
-        });
+        setListeners(view);
+        setAnimator(view);
+
+
         return view;
     }
+
+    private void setListeners(View view){
+
+
+        view.findViewById(R.id.imageView_cardView_yanfa).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("type",YANFA);
+                startActivityForResult(intent,1);
+
+            }
+        });
+
+        view.findViewById(R.id.imageView_cardView_java).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("type",JAVA);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        view.findViewById(R.id.imageView_cardView_web ).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("type",WEB);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        view.findViewById(R.id.imageView_cardView_android).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("type",ANDROID);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        view.findViewById(R.id.imageView_cardView_data).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("type",DATA);
+                startActivityForResult(intent,1);
+            }
+        });
+    }
+
+    private void setAnimator(View view){
+        NewCardView yanfa = view.findViewById(R.id.cardView_yanfa);
+        NewCardView android = view.findViewById(R.id.cardView_android);
+        NewCardView data = view.findViewById(R.id.cardView_data);
+        NewCardView web = view.findViewById(R.id.cardView_web);
+        NewCardView java = view.findViewById(R.id.cardView_java);
+
+        Animator objectAnimator = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator.setTarget(yanfa);
+        objectAnimator.start();
+
+        Animator objectAnimator1 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator1.setTarget(android);
+        objectAnimator1.start();
+
+        Animator objectAnimator2 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator2.setTarget(web);
+        objectAnimator2.start();
+
+        Animator objectAnimator3 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator3.setTarget(java);
+        objectAnimator3.start();
+
+        Animator objectAnimator4 = AnimatorInflater.loadAnimator(getActivity(),R.animator.card_shake);
+        objectAnimator4.setTarget(data);
+        objectAnimator4.start();
+    }
+
 
 }

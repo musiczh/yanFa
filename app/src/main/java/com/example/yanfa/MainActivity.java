@@ -1,5 +1,6 @@
  package com.example.yanfa;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,31 +10,55 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.yanfa.bean.BaseBean;
+import com.example.yanfa.bean.EnrollBean;
+import com.example.yanfa.bean.Result;
+import com.example.yanfa.iApiService.EnrollApiService;
+import com.example.yanfa.iApiService.NoticeApiService;
+import com.example.yanfa.interfaces.MainActivityInter;
 import com.example.yanfa.ui.activity.LoginActivity;
+import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.widget.DrawerLayoutNoSlidingConflict;
 import com.google.android.material.navigation.NavigationView;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
  /**
   * MainActivity
   */
- public class MainActivity extends AppCompatActivity {
+ public class MainActivity extends AppCompatActivity implements MainActivityInter {
      private AppBarConfiguration appBarConfiguration;
+     private static Context mContext;
+     private String phoneNum = null;
+     private boolean ifLogin = false;
+     TextView textViewRegister;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            MainActivity.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.activity_main);
+
+        mContext = this;
 
         //设置toolbar
         Toolbar toolbar = findViewById(R.id.toolBar_main);
@@ -44,13 +69,10 @@ import java.util.Objects;
 
 
 
-
-
-
         //更改DrawerLayout的侧滑距离
         DrawerLayoutNoSlidingConflict drawerLayout = findViewById(R.id.drawerLayout_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            setDrawerLeftEdgeSize(this,drawerLayout,0.5f);
+            setDrawerLeftEdgeSize(this,drawerLayout,0.2f);
 
         //将DrawerLayout和AppBar联合起来
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_main,R.id.nav_examine).setDrawerLayout(drawerLayout).build();
@@ -60,20 +82,53 @@ import java.util.Objects;
         NavigationUI.setupWithNavController(navigationView,navController);
 
 
+
+
         //登录文字监听
         View view = navigationView.getHeaderView(0);
-        TextView textView1 = view.findViewById(R.id.textView_header_layout);
-        textView1.setOnClickListener(new View.OnClickListener() {
+        textViewRegister = view.findViewById(R.id.textView_header_layout);
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                goLogin();
             }
         });
 
+        //判断是否已经登录
+        ifLogin = getIntent().getBooleanExtra("ifLogin",false);
+        if (ifLogin){
+            textViewRegister.setText("已登录");
+            phoneNum = this.getSharedPreferences("user",MODE_PRIVATE)
+                    .getString("phoneNum","0");
+        }
     }
 
+    @Override
+    public void goLogin(){
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivityForResult(intent,0);
+    }
 
+     @Override
+     public void backFragment() {
+         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+         navController.navigateUp();
+     }
+
+     @Override
+     public boolean getIfLogin() {
+         return ifLogin;
+     }
+
+     @Override
+     public String getPhoneNum() {
+        if (phoneNum!=null)
+         return phoneNum;
+        else return null;
+     }
+
+
+     //标题栏
      @Override
      public boolean onSupportNavigateUp() {
          NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
@@ -109,4 +164,30 @@ import java.util.Objects;
              e.printStackTrace();
          }
      }
-}
+
+     //详情页面点击报名按钮跳转报名界面
+     public void turn_enroll(){
+        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_enroll);
+
+     }
+
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+         if (resultCode == 1) turn_enroll();
+         if (resultCode == 2) {
+             textViewRegister.setText("已登录");
+             ifLogin = true;
+             if (data != null) {
+                 phoneNum = data.getStringExtra("phoneNum");
+             }
+         }
+     }
+
+
+
+     public static Context getContext(){
+        return mContext;
+     }
+ }
