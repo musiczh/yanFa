@@ -10,7 +10,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,13 +86,14 @@ import retrofit2.Response;
 
 
 
-        //登录文字监听
+        //登录文字以及图案设置监听
         View view = navigationView.getHeaderView(0);
         textViewRegister = view.findViewById(R.id.textView_header_layout);
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goLogin();
+                if (ifLogin) openLoginAlert();
+                else goLogin();
             }
         });
 
@@ -125,6 +128,27 @@ import retrofit2.Response;
         if (phoneNum!=null)
          return phoneNum;
         else return null;
+     }
+
+     //弹出是否重新登录框
+     private void openLoginAlert(){
+         final AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
+         bb.setMessage("您已经登录了，是否重新登录？");
+         bb.setTitle("提示");
+         bb.setCancelable(true);
+         bb.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 goLogin();
+             }
+         });
+         bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+             }
+         });
+         bb.show();
+
      }
 
 
