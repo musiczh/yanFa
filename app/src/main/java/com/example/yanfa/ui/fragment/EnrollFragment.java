@@ -242,12 +242,12 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
                     }
 
-                    mNameTextLay.setErrorEnabled(false);
+                   /* mNameTextLay.setErrorEnabled(false);
                     mQQTextLay.setErrorEnabled(false);
                     mMajorTextLay.setErrorEnabled(false);
                     mGradeTextLay.setErrorEnabled(false);
                     mStuNumTextLay.setErrorEnabled(false);
-                    mFacultyLay.setErrorEnabled(false);
+                    mFacultyLay.setErrorEnabled(false);*/
 
                     mNameEdt = editText.getText().toString().trim();
                     mStuNumEdt = editTex2.getText().toString().trim();
@@ -259,35 +259,48 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                     //判断内容否为空
                     if(mNameEdt.equals("")){
+                        mNameTextLay.setErrorEnabled(true);
                         mNameTextLay.setError("内容不能为空");
                     }else {
+                        mNameTextLay.setErrorEnabled(false);
                         mEnrollBean.setName(mNameEdt);
                     }
                     if(mQqEdt.equals("")){
+                        mQQTextLay.setErrorEnabled(true);
                         mQQTextLay.setError("内容不能为空");
                     }else {
+                        mQQTextLay.setErrorEnabled(false);
                         mEnrollBean.setQq(mQqEdt);
                     }
                     if(mStuNumEdt.equals("")){
-                         mStuNumTextLay.setError("内容不能为空");
+                        mStuNumTextLay.setErrorEnabled(true);
+                        mStuNumTextLay.setError("内容不能为空");
                     }else if(mStuNumEdt.length()!=10){
+                        mStuNumTextLay.setErrorEnabled(true);
                         mStuNumTextLay.setError("请输入正确的学号");
                     }else {
+                        mStuNumTextLay.setErrorEnabled(false);
                         mEnrollBean.setSno(mStuNumEdt);
                     }
                     if(mMajorEdt.equals("")){
+                        mMajorTextLay.setErrorEnabled(true);
                         mMajorTextLay.setError("内容不能为空");
                     }else {
+                        mMajorTextLay.setErrorEnabled(false);
                         mEnrollBean.setMajor(mMajorEdt);
                     }
                     if(mGradeEdt.equals("")){
+                        mGradeTextLay.setErrorEnabled(true);
                         mGradeTextLay.setError("内容不能为空");
                     }else {
+                        mGradeTextLay.setErrorEnabled(false);
                         mEnrollBean.setSex(mGender);
                     }
                     if(mFacultyEdt.equals("")){
+                        mFacultyLay.setErrorEnabled(true);
                         mFacultyLay.setError("内容不能为空");
                     }else {
+                        mFacultyLay.setErrorEnabled(false);
                         mEnrollBean.setFaculty(mFacultyEdt);
                     }
 
@@ -310,7 +323,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         ToastUtils.showToast(getActivity(),"网络不可用");
                         //若内容全有则可报名
                     }else if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
-                            &&mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
+                            ||mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
 
                         //点击报名首先判断登录，登录状态才能继续下列操作
                             if(!mainActivity.getIfLogin()){
