@@ -59,8 +59,9 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
 
     }
 
+    private static  int count = 0;
     @Override
-    public void Login(String phoneNum, String password,String code) {
+    public void Login(final String phoneNum, final String password, final String code) {
         if(correctData(phoneNum,password)){
             getView().showProgressBar();
             final RegLoginInfo regLoginInfo = new RegLoginInfo(phoneNum,password,code);
@@ -71,12 +72,19 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
                     if (s==null) getView().showToast("登录成功");
                     else getView().showToast(s);
                     getView().closeProgressBar();
+
                 }
 
                 @Override
                 public void onFail(Object result) {
-                    getView().showToast("登录失败，请再点击登录尝试");
-                    getView().closeProgressBar();
+                    if (count<=5){
+                        count++;
+                        Login( phoneNum,  password,  code);
+                    }else{
+                        getView().showToast("登录失败，请再次点击登录尝试");
+                        getView().closeProgressBar();
+                    }
+
                 }
             });
         }
