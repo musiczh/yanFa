@@ -6,11 +6,15 @@ public class ExamineInfo implements ITimeItem {
     private String stage;
     private String msg;
     private int color;
+    private int res;
+    private boolean b;
 
-    public ExamineInfo(String stage, String msg, int color) {
+    public ExamineInfo(String stage, String msg, int color,int res,boolean mboolean) {
         this.stage = stage;
         this.msg = msg;
         this.color = color;
+        this.res = res;
+        this.b = mboolean;
     }
 
     public String getStage() {
@@ -29,6 +33,21 @@ public class ExamineInfo implements ITimeItem {
         this.msg = msg;
     }
 
+    public boolean getBoolean(){
+        return b;
+    }
+
+    public void setBoolean(boolean b){
+        this.b = b;
+    }
+
+    public int getRes(){
+        return res;
+    }
+
+    public void setRes(int res){
+        this.res = res;
+    }
 
     public void setColor(int color) {
         this.color = color;
@@ -40,12 +59,12 @@ public class ExamineInfo implements ITimeItem {
     }
 
     @Override
+    public int getResource() {
+        return res;
+    }
+    @Override
     public int getColor() {
         return color;
     }
 
-    @Override
-    public int getResource() {
-        return 0;
-    }
 }
