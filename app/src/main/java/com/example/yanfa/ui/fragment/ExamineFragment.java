@@ -113,7 +113,7 @@ public class ExamineFragment extends Fragment {
                     if (response.body()!=null){
                         code = response.body().getData();
                         switch (code) {
-                            case 10:
+                            case 11:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "进行中", Color.parseColor("#FFFF00"),
@@ -125,7 +125,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 11:
+                            case 10:
                                 data.set(0, new ExamineInfo("笔试", "不通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_pan,true));
                                 data.set(1, new ExamineInfo("一轮面试", "未开放", Color.parseColor("#2F4F4F"),
@@ -137,7 +137,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 20:
+                            case 21:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -149,7 +149,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 21:
+                            case 20:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "不通过", Color.parseColor("#f36c60"),
@@ -161,7 +161,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 30:
+                            case 31:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -173,7 +173,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 31:
+                            case 30:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -185,7 +185,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 40:
+                            case 41:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -197,7 +197,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "进行中", Color.parseColor("#FFFF00"),
                                         R.drawable.ex_test,true));
                                 break;
-                            case 41:
+                            case 40:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -209,7 +209,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
-                            case 50:
+                            case 51:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
@@ -221,7 +221,7 @@ public class ExamineFragment extends Fragment {
                                 data.set(4, new ExamineInfo("二轮考核", "通过", Color.parseColor("#FFFF00"),
                                         R.drawable.ex_test,true));
                                 break;
-                            case 51:
+                            case 50:
                                 data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_pan,false));
                                 data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
