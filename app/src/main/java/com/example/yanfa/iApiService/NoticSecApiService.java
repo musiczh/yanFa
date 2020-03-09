@@ -8,8 +8,7 @@ import retrofit2.http.GET;
 
 import static com.example.yanfa.util.URLStaticQuality.NOTICE;
 
-public interface NoticeApiService {
-
+public interface NoticSecApiService {
     @GET(NOTICE)
-    Call<BaseBean<String>> getNotice();
+    Call<NoticBean> getNoticeSec();
 }
