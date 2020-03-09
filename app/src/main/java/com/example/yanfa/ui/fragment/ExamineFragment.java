@@ -59,12 +59,23 @@ public class ExamineFragment extends Fragment {
         return view;
     }
 
-    private void initView(View view) {
-
+    @Override
+    public void onResume() {
+        super.onResume();
         mainActivity = (MainActivity) getActivity();
-        if(!mainActivity.getIfLogin()){
+        if (!mainActivity.getIfLogin()) {
             dialogBox2();      //若没有登录则先登录
         }
+        getNot();
+        reflashRL();
+    }
+
+    private void initView(View view) {
+
+//        mainActivity = (MainActivity) getActivity();
+//        if(!mainActivity.getIfLogin()){
+//            dialogBox2();      //若没有登录则先登录
+//        }
         rlExamine = view.findViewById(R.id.rl_examine);
         rlExamine.setLayoutManager(new DoubleSideLayoutManager(DoubleSideLayoutManager.START_LEFT));
         exAdpter = new ExamineRLAdpter(getContext(),data);
@@ -279,14 +290,19 @@ public class ExamineFragment extends Fragment {
         AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
         bb.setMessage("请先登录");
         bb.setTitle("提示");
-        bb.setCancelable(true);
+        bb.setCancelable(false);
         bb.setPositiveButton("去登陆", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mainActivity.goLogin();
             }
         });
-
+        bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mainActivity.backFragment();
+            }
+        });
         bb.show();
     }
     private void dialogBox() {
