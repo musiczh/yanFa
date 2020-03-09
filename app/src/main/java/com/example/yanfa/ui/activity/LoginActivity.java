@@ -130,8 +130,8 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
                 password = String.valueOf(textInputEditTextPassword.getText());
                 code = String.valueOf(textInputEditTextCode.getText());
                 if (phoneNum.length()!=11) textInputEditTextPhone.setError("请输入正确的手机号码");
-                else if (code.length()==0) textInputEditTextPassword.setError("密码不能为空");
-                else if(password.length()==0) textInputEditTextCode.setError("验证码不能为空");
+                else if (password.length()==0) textInputEditTextPassword.setError("密码不能为空");
+                else if(code.length()==0) textInputEditTextCode.setError("验证码不能为空");
                 else
                 presenter.Login(phoneNum,password,code);
             }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/linear_header_layout">
 
     <ImageView
         android:id="@+id/imageView_header_layout"
@@ -17,7 +19,7 @@
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_marginLeft="6dp"
         android:textSize="15sp"
         android:id="@+id/textView_header_layout"
         android:text="@string/go_login"
