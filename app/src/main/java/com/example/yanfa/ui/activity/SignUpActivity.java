@@ -101,4 +101,10 @@ public class SignUpActivity extends AppCompatActivity implements LoginUIInter {
     public void setCodeImageView(Bitmap bitmap) {
         //注册页面不需要图片验证码
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_back_finish_anim,R.anim.activity_back_start_anim);
+    }
 }

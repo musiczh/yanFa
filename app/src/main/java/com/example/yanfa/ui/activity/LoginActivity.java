@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
                 Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
                 intent.putExtra("type",SIGN_UP);
                 startActivity(intent);
+                overridePendingTransition(R.anim.activity_start_anim,R.anim.activity_finish_anim);
             }
         });
 
@@ -175,4 +176,9 @@ public class LoginActivity extends AppCompatActivity implements LoginUIInter {
             textView_code.setVisibility(View.GONE);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_back_finish_anim,R.anim.activity_back_start_anim);
+    }
 }

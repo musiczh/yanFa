@@ -81,6 +81,7 @@ public class LaunchActivity extends AppCompatActivity {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
         intent.putExtra("ifLogin",ifLogin);
         startActivity(intent);
+        overridePendingTransition(R.anim.activity_start_anim,R.anim.activity_finish_anim);
     }
 
     //判断是否已经登录了；或者是否cookie已经过期
@@ -114,6 +115,12 @@ public class LaunchActivity extends AppCompatActivity {
                         Toast.makeText(LaunchActivity.this,"网络似乎出了点小问题哦",Toast.LENGTH_SHORT).show();
                     }
                 });
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
 
     }
 }

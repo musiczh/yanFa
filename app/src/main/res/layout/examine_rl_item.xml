@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     android:layout_margin="6dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 
     <TextView
         android:id="@+id/tv_stage"
@@ -24,6 +27,9 @@
         android:textSize="14sp"
         android:layout_marginTop="10dp"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 
 
     <View

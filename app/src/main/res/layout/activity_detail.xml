@@ -64,7 +64,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ui.activity.DetailActivity"
         >
-        <com.example.yanfa.widget.NewCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/large_text" />
-        </com.example.yanfa.widget.NewCardView>
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.core.widget.NestedScrollView>
