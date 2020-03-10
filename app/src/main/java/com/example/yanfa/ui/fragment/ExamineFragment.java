@@ -48,6 +48,7 @@ public class ExamineFragment extends Fragment {
     SwipeRefreshLayout mRefreshLayout;
     String notic;
     AlertDialog.Builder cc;
+    boolean check = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,17 +86,19 @@ public class ExamineFragment extends Fragment {
         exAdpter.setOnItemClickListener(new ExamineRLAdpter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-
                 dialogBox();
             }
         });
         mRefreshLayout = view.findViewById(R.id.layout_swipe_refresh);
+        mRefreshLayout.setColorSchemeColors(Color.BLACK, Color.GREEN, Color.RED, Color.YELLOW, Color.BLUE);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                check = true;
                 getNot();
                 reflashRL();
                 mRefreshLayout.setRefreshing(false);
+
             }
         });
     }
@@ -249,12 +252,15 @@ public class ExamineFragment extends Fragment {
                         }
                         exAdpter.update(data);
                         timeLine.replace(data);
+                        freshSucceew();
+                        check = false;
                     }
                 }
 
                 @Override
                 public void onFailure(Call<PhaseBean> call, Throwable t) {
-
+                        freshError();
+                        check = false;
                 }
             });
 }
@@ -286,6 +292,7 @@ public class ExamineFragment extends Fragment {
                 .setDot(TimeLine.FLAG_DOT_RES)
                 .build(ExamineInfoDTL.class);
     }
+
     private void dialogBox2() {
         AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
         bb.setMessage("请先登录");
@@ -305,6 +312,7 @@ public class ExamineFragment extends Fragment {
         });
         bb.show();
     }
+
     private void dialogBox() {
         cc = new AlertDialog.Builder(getContext());
         cc.setMessage(notic);
@@ -318,5 +326,16 @@ public class ExamineFragment extends Fragment {
         });
 
         cc.show();
+    }
+
+    private void freshSucceew(){
+        if(check) {
+            Toast.makeText(getActivity(), "获取成功！", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void freshError(){
+        if(check) {
+            Toast.makeText(getActivity(), "获取失败！", Toast.LENGTH_SHORT).show();
+        }
     }
 }
