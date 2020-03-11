@@ -54,7 +54,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     private CheckBox mGirlCkBox;
     private String mStuNumEdt="";
     private String mMajorEdt;
-    private String mGradeEdt;
+//    private String mGradeEdt;
     private String mQqEdt;
     private Boolean mGender;
     private String mDirection;
@@ -94,6 +94,24 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mainActivity = (MainActivity) getActivity();
+        if (!mainActivity.getIfLogin()) {
+            dialogBox2();      //若没有登录则先登录
+        }
+
+        if (!NetworkUtil.isNetworkAvailable(getContext())){
+
+            ToastUtils.showToast(getActivity(),"网络不可用");
+
+        }else if(mainActivity.getIfLogin()){  //有登录则判断是否报名过
+            ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
+        }
+
+    }
+
     private void initView(View view){
 
         mBoyCkBox = view.findViewById(R.id.boy_checkBox);
@@ -102,7 +120,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         editText = view.findViewById(R.id.name_editText);
         editTex2 = view.findViewById(R.id.student_number_editText);
         editText3 = view.findViewById(R.id.major_editText);
-        editText4= view.findViewById(R.id.grade_editText);
+//        editText4= view.findViewById(R.id.grade_editText);
         editText5 = view.findViewById(R.id.qq_editText);
         editText6 = view.findViewById(R.id.self_edt);
         editText7 = view.findViewById(R.id.faculty_editText);
@@ -115,7 +133,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mBigDataBtn = view.findViewById(R.id.big_data_radioButton);
 
         mNameTextLay = view.findViewById(R.id.name_textInputLayout);
-        mGradeTextLay = view.findViewById(R.id.grade_textInputLayout);
+//        mGradeTextLay = view.findViewById(R.id.grade_textInputLayout);
         mMajorTextLay = view.findViewById(R.id.major_textInputLayout);
         mStuNumTextLay = view.findViewById(R.id.stu_num_textInputLayout);
         mQQTextLay = view.findViewById(R.id.qq_textInputLayout);
@@ -147,13 +165,6 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         pd.setMessage("正在上传...");
 
 
-        if (!NetworkUtil.isNetworkAvailable(getContext())){
-
-            ToastUtils.showToast(getActivity(),"网络不可用");
-
-        }else if(mainActivity.getIfLogin()){  //有登录则判断是否报名过
-            ((EnrollPresenter) mPresenter).goIfEnroll(mainActivity.getPhoneNum());
-        }
 
 
 
@@ -252,10 +263,20 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     mNameEdt = editText.getText().toString().trim();
                     mStuNumEdt = editTex2.getText().toString().trim();
                     mMajorEdt = editText3.getText().toString().trim();
-                    mGradeEdt = editText4.getText().toString().trim();
+//                    mGradeEdt = editText4.getText().toString().trim();
                     mQqEdt = editText5.getText().toString().trim();
                     mMySelfEdt = editText6.getText().toString().trim();
                     mFacultyEdt = editText7.getText().toString().trim();
+                    //判断是否填写姓别
+                    if(!sexFlag){
+                        ToastUtils.showToast(getActivity(),"请选择你的性别");
+                    } else if(!directionFlag){
+                        ToastUtils.showToast(getActivity(),"请选择你报名的方向");
+                    }else {
+                        mEnrollBean.setSex(mGender);
+                        mEnrollBean.setDirection(mDirection);
+
+                    }
 
                     //判断内容否为空
                     if(mNameEdt.equals("")){
@@ -289,13 +310,13 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         mMajorTextLay.setErrorEnabled(false);
                         mEnrollBean.setMajor(mMajorEdt);
                     }
-                    if(mGradeEdt.equals("")){
+                  /*  if(mGradeEdt.equals("")){
                         mGradeTextLay.setErrorEnabled(true);
                         mGradeTextLay.setError("内容不能为空");
                     }else {
                         mGradeTextLay.setErrorEnabled(false);
-                        mEnrollBean.setSex(mGender);
-                    }
+                        mEnrollBean.set(mGradeEdt);
+                    }*/
                     if(mFacultyEdt.equals("")){
                         mFacultyLay.setErrorEnabled(true);
                         mFacultyLay.setError("内容不能为空");
@@ -308,16 +329,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                     Log.d("测试","性别"+mEnrollBean.getSex());
 
-                    //判断是否填写姓别
-                    if(!sexFlag){
-                        ToastUtils.showToast(getActivity(),"请选择你的性别");
-                    } else if(!directionFlag){
-                        ToastUtils.showToast(getActivity(),"请选择你报名的方向");
-                    }else {
-                        mEnrollBean.setSex(mGender);
-                        mEnrollBean.setDirection(mDirection);
 
-                    }
 
 
 
@@ -326,8 +338,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     if (!NetworkUtil.isNetworkAvailable(getContext())){
 
                         ToastUtils.showToast(getActivity(),"网络不可用");
-                        //若内容全有则可报名
-                    }else if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mGradeEdt.equals("")||mMajorEdt.equals("")
+                    }else if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mMajorEdt.equals("")
                             ||mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
 
                         //点击报名首先判断登录，登录状态才能继续下列操作
@@ -406,6 +417,12 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                mainActivity.goLogin();
             }
         });
+        bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mainActivity.backFragment();
+            }
+        });
 
         bb.show();
     }
@@ -421,7 +438,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
             }
         });
-        bb.setNegativeButton("报名", new DialogInterface.OnClickListener() {
+        bb.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                apply();
