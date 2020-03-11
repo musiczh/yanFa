@@ -230,9 +230,9 @@ public class ExamineFragment extends Fragment {
                                         R.drawable.ex_face,false));
                                 data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "进行中", Color.parseColor("#FFFF00"),
+                                data.set(3, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "通过", Color.parseColor("#FFFF00"),
+                                data.set(4, new ExamineInfo("二轮考核", "通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_test,true));
                                 break;
                             case 50:
