@@ -77,6 +77,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     private TextInputLayout mGradeTextLay;
     private TextInputLayout mQQTextLay;
     private TextInputLayout mFacultyLay;
+    private TextInputLayout selfLay;
 
     private EnrollBean mEnrollBean;
 //    private ProgressBar mProgressBar;
@@ -138,7 +139,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         mStuNumTextLay = view.findViewById(R.id.stu_num_textInputLayout);
         mQQTextLay = view.findViewById(R.id.qq_textInputLayout);
         mFacultyLay = view.findViewById(R.id.faculty_textInputLayout);
-
+        selfLay = view.findViewById(R.id.self_textInputLayout);
 //        mProgressBar = view.findViewById(R.id.progressBar);
 
         mJavaBtn.setOnCheckedChangeListener(this);
@@ -289,6 +290,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     if(mQqEdt.equals("")){
                         mQQTextLay.setErrorEnabled(true);
                         mQQTextLay.setError("内容不能为空");
+                    }else if(mQqEdt.length()<5||mQqEdt.length()>11) {
+                        mQQTextLay.setErrorEnabled(true);
+                        mQQTextLay.setError("请输入正常的QQ");
                     }else {
                         mQQTextLay.setErrorEnabled(false);
                         mEnrollBean.setQq(mQqEdt);
@@ -324,8 +328,14 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                         mFacultyLay.setErrorEnabled(false);
                         mEnrollBean.setFaculty(mFacultyEdt);
                     }
+                    if(mMySelfEdt.length()>120){
+                        selfLay.setErrorEnabled(true);
 
-                    mEnrollBean.setSelfIntroduction(mMySelfEdt);
+                        selfLay.setError("字数超出限制");
+                    }else {
+                        selfLay.setErrorEnabled(false);
+                        mEnrollBean.setSelfIntroduction(mMySelfEdt);
+                    }
 
                     Log.d("测试","性别"+mEnrollBean.getSex());
 
@@ -339,7 +349,8 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                         ToastUtils.showToast(getActivity(),"网络不可用");
                     }else if(!(mStuNumEdt.equals("")||mStuNumEdt.length()!=10||mMajorEdt.equals("")
-                            ||mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals(""))){
+                            ||mQqEdt.equals("")||mNameEdt.equals("")||mFacultyEdt.equals("")
+                            ||mMySelfEdt.length()>120||mQqEdt.length()<5||mQqEdt.length()>11)){
 
                         //点击报名首先判断登录，登录状态才能继续下列操作
                             if(!mainActivity.getIfLogin()){
@@ -361,7 +372,13 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
      */
     @Override
     public void onFailure(String str) {
-        ToastUtils.showToast(getActivity(),str);
+        pd.dismiss();
+        if(str.length()<60){
+            ToastUtils.showToast(getActivity(),str);
+        }else {
+            Toast.makeText(getActivity(),"系统错误,请联系管理员",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /**
@@ -429,19 +446,19 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     //弹出报名过对话框
     private void dialogBox3() {
         AlertDialog.Builder bb = new AlertDialog.Builder(getContext());
-        bb.setMessage("你已经报名过了，是否重新报名");
+        bb.setMessage("你已经报名过了，请勿重复报名");
         bb.setTitle("提示");
         bb.setCancelable(true);
         bb.setPositiveButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                mainActivity.backFragment();
             }
         });
         bb.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               apply();
+
             }
         });
         bb.setCancelable(false);

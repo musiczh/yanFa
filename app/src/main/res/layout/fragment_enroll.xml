@@ -322,10 +322,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/self_introduction"
                     android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/self_edt"
+                    app:layout_constraintBottom_toBottomOf="@+id/self_textInputLayout"
                     app:layout_constraintEnd_toEndOf="@+id/textView7"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="@+id/self_edt" />
+                    app:layout_constraintTop_toTopOf="@+id/self_textInputLayout" />
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -348,34 +348,40 @@
                         tools:layout_editor_absoluteY="155dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/self_textInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_style"
 
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/qq_textInputLayout"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="@+id/qq_textInputLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup2">
 
                     <EditText
                         android:id="@+id/self_edt"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
 
 
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/edit_text_style"
                         android:enabled="true"
                         android:gravity="top"
+                        android:hint="字数在120字以内"
                         android:inputType="textMultiLine"
-                        android:maxLines="10"
-                        android:minLines="8"
                         android:scrollbars="vertical"
                         android:textColor="#1F1F1F	"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="@+id/radioGroup2"
-                        app:layout_constraintTop_toBottomOf="@+id/radioGroup2">
+                        tools:layout_editor_absoluteX="82dp"
+                        tools:layout_editor_absoluteY="371dp">
 
 
                     </EditText>
 
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
