@@ -80,6 +80,7 @@
         android:id="@+id/textInputLayout_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
 
         app:layout_constraintTop_toBottomOf="@id/center_point"
         app:layout_constraintLeft_toLeftOf="parent"

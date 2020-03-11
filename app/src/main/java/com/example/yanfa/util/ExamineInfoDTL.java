@@ -41,7 +41,7 @@ public class ExamineInfoDTL extends DoubleTimeLineDecoration {
             drawable.setBounds(left, top, right, bottom);
             drawable.draw(canvas);
             mDotPaint.setStyle(Paint.Style.STROKE);
-            mDotPaint.setColor(Color.parseColor("#ffffff"));
+            mDotPaint.setColor(Color.parseColor("#CDC9C9"));
             mDotPaint.setStrokeWidth(UIUtils.dip2px(2));
             canvas.drawCircle(cx, cy, width / 2 - UIUtils.dip2px(3), mDotPaint);
         }

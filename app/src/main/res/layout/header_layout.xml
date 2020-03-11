@@ -19,10 +19,11 @@
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="15sp"
         android:id="@+id/textView_header_layout"
         android:text="@string/go_login"
-        android:layout_marginStart="4dp" />
+         />
 
 </LinearLayout>

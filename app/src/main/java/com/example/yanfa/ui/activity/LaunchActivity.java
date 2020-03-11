@@ -20,6 +20,7 @@ import com.example.yanfa.R;
 import com.example.yanfa.bean.BaseBean;
 import com.example.yanfa.iApiService.NoticeApiService;
 import com.example.yanfa.util.AddCookiesInterceptor;
+import com.example.yanfa.util.NetworkUtil;
 import com.example.yanfa.util.ReceivedCookiesInterceptor;
 
 
@@ -64,9 +65,11 @@ public class LaunchActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (NetworkUtil.isNetworkAvailable(LaunchActivity.this))
                 haveLogin();
+                else Toast.makeText(LaunchActivity.this,"网络开了点小差",Toast.LENGTH_SHORT).show();
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
