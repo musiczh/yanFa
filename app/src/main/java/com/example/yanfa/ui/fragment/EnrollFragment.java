@@ -217,8 +217,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 }
                 break;
             case R.id.boy_checkBox:
-                mGender = true;
+
                 if(isChecked){
+                    mGender = true;
                     mGirlCkBox.setChecked(false);
                     sexFlag = true;
                 }else {
@@ -227,8 +228,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                 break;
             case R.id.girl_checkBox:
-                mGender = false;
+
                 if(isChecked){
+                    mGender = false;
                     mBoyCkBox.setChecked(false);
                     sexFlag = true;
                 }else {
@@ -271,10 +273,14 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                     //判断是否填写姓别
                     if(!sexFlag){
                         ToastUtils.showToast(getActivity(),"请选择你的性别");
-                    } else if(!directionFlag){
+                    } else{
+                        mEnrollBean.setSex(mGender);
+                    }
+
+                    if(!directionFlag){
                         ToastUtils.showToast(getActivity(),"请选择你报名的方向");
                     }else {
-                        mEnrollBean.setSex(mGender);
+
                         mEnrollBean.setDirection(mDirection);
 
                     }
