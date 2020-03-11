@@ -9,8 +9,8 @@ public class NetworkUtil {
 	/**
 	 * 检查网络是否可用
 	 * 
-	 * @param context
-	 * @return
+	 * @param context 传递上下文
+	 * @return 返回是否有网络
 	 */
 	public static boolean isNetworkAvailable(Context context) {
  
@@ -23,12 +23,8 @@ public class NetworkUtil {
 		}
  
 		NetworkInfo networkinfo = manager.getActiveNetworkInfo();
- 
-		if (networkinfo == null || !networkinfo.isAvailable()) {
-			return false;
-		}
- 
-		return true;
+
+		return networkinfo != null && networkinfo.isAvailable();
 	}
 	
 }

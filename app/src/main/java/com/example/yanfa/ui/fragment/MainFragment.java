@@ -8,19 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.yanfa.MainActivity;
 import com.example.yanfa.R;
 import com.example.yanfa.ui.activity.DetailActivity;
 import com.example.yanfa.widget.NewCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * 主界面fragment
@@ -38,7 +33,7 @@ public class MainFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         setListeners(view);
-        setAnimator(view);
+        //setAnimator(view);
 
 
         return view;
@@ -52,7 +47,7 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("type",YANFA);
-                startActivityForResult(intent,1);
+                startAct(intent);
 
             }
         });
@@ -62,7 +57,7 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("type",JAVA);
-                startActivityForResult(intent,1);
+                startAct(intent);
             }
         });
 
@@ -71,7 +66,7 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("type",WEB);
-                startActivityForResult(intent,1);
+                startAct(intent);
             }
         });
 
@@ -80,7 +75,7 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("type",ANDROID);
-                startActivityForResult(intent,1);
+                startAct(intent);
             }
         });
 
@@ -89,9 +84,15 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("type",DATA);
-                startActivityForResult(intent,1);
+                startAct(intent);
             }
         });
+    }
+
+    private void startAct(Intent intent){
+        startActivityForResult(intent,1);
+        if (getActivity()!=null)
+        getActivity().overridePendingTransition(R.anim.activity_start_anim,R.anim.activity_finish_anim);
     }
 
     private void setAnimator(View view){

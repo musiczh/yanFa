@@ -20,6 +20,7 @@ import com.example.yanfa.R;
 import com.example.yanfa.bean.BaseBean;
 import com.example.yanfa.iApiService.NoticeApiService;
 import com.example.yanfa.util.AddCookiesInterceptor;
+import com.example.yanfa.util.NetworkUtil;
 import com.example.yanfa.util.ReceivedCookiesInterceptor;
 
 
@@ -64,9 +65,11 @@ public class LaunchActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (NetworkUtil.isNetworkAvailable(LaunchActivity.this))
                 haveLogin();
+                else Toast.makeText(LaunchActivity.this,"网络开了点小差",Toast.LENGTH_SHORT).show();
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -81,6 +84,7 @@ public class LaunchActivity extends AppCompatActivity {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
         intent.putExtra("ifLogin",ifLogin);
         startActivity(intent);
+        overridePendingTransition(R.anim.activity_start_anim,R.anim.activity_finish_anim);
     }
 
     //判断是否已经登录了；或者是否cookie已经过期
@@ -114,6 +118,12 @@ public class LaunchActivity extends AppCompatActivity {
                         Toast.makeText(LaunchActivity.this,"网络似乎出了点小问题哦",Toast.LENGTH_SHORT).show();
                     }
                 });
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
 
     }
 }

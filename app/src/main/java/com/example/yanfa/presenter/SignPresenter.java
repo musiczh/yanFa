@@ -15,7 +15,9 @@ import com.example.yanfa.model.SignModel;
 public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginPresentorInter {
     private SignModel mSignModel = new SignModel();
     private boolean ifCanSendCode = true;
+    private final int TIME_SPAN = 5;
 
+    private int sendCodeTime = TIME_SPAN;
     //注册界面发送验证码的按钮逻辑
     @Override
     public void sendCode(String phoneNum) {
@@ -44,19 +46,28 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Thread.sleep(10000);
-                        ifCanSendCode = true;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    for (int i=0;i<TIME_SPAN;i++){
+                        try {
+                            Thread.sleep(1000);
+                            addTime();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    ifCanSendCode = true;
+                    setTime();
+
                 }
             }).start();
         }else{
-            getView().showToast("您发送验证码太频繁了");
+            getView().showToast("您发送验证码太频繁了"+String.valueOf(sendCodeTime)+"s");
         }
-
-
+    }
+    private void addTime(){
+        sendCodeTime--;
+    }
+    private void setTime(){
+        sendCodeTime = TIME_SPAN;
     }
 
     private static  int count = 0;

@@ -24,4 +24,8 @@ public class URLStaticQuality {
 
     //通知的附加地址
     public static final String NOTICE = "/recruit/result/notice";
+
+    //获取所在阶段
+    public static final String PHASE = "/recruit/result/phase";
+
 }

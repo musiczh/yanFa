@@ -50,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(1);
                 finish();
+
             }
         });
 
@@ -95,5 +96,11 @@ public class DetailActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_back_finish_anim,R.anim.activity_back_start_anim);
     }
 }
