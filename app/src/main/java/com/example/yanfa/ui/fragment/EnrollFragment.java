@@ -168,7 +168,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()){
             case R.id.android_radioButton:
-                mDirection="Android";
+                mDirection="安卓";
                 mWebDataRgp.clearCheck();
                 Log.d("Button","android");
                 if(isChecked){
@@ -205,9 +205,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 }
                 break;
             case R.id.boy_checkBox:
+                mGender = true;
                 if(isChecked){
                     mGirlCkBox.setChecked(false);
-                    mGender = true;
                     sexFlag = true;
                 }else {
                     sexFlag = false;
@@ -215,9 +215,9 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                 break;
             case R.id.girl_checkBox:
+                mGender = false;
                 if(isChecked){
                     mBoyCkBox.setChecked(false);
-                    mGender = false;
                     sexFlag = true;
                 }else {
                     sexFlag = false;
@@ -306,17 +306,22 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
 
                     mEnrollBean.setSelfIntroduction(mMySelfEdt);
 
+                    Log.d("测试","性别"+mEnrollBean.getSex());
 
                     //判断是否填写姓别
                     if(!sexFlag){
                         ToastUtils.showToast(getActivity(),"请选择你的性别");
                     } else if(!directionFlag){
                         ToastUtils.showToast(getActivity(),"请选择你报名的方向");
+                    }else {
+                        mEnrollBean.setSex(mGender);
+                        mEnrollBean.setDirection(mDirection);
+
                     }
 
 
 
-                    Log.d("测试","----"+enrollFalg);
+
                     //先判断有没有网络
                     if (!NetworkUtil.isNetworkAvailable(getContext())){
 
@@ -378,7 +383,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 mainActivity.backFragment();
             }
         });
-        bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        bb.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
