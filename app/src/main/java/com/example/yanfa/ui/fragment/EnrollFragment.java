@@ -446,7 +446,7 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
                 mainActivity.backFragment();
             }
         });
-
+        bb.setCancelable(false);
         bb.show();
     }
     //弹出报名过对话框
@@ -458,13 +458,13 @@ public class EnrollFragment extends Fragment implements View.OnClickListener, IE
         bb.setPositiveButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mainActivity.backFragment();
+
             }
         });
         bb.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                mainActivity.backFragment();
             }
         });
         bb.setCancelable(false);
