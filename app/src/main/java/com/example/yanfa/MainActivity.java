@@ -19,27 +19,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.yanfa.bean.BaseBean;
-import com.example.yanfa.bean.EnrollBean;
-import com.example.yanfa.bean.Result;
-import com.example.yanfa.iApiService.EnrollApiService;
-import com.example.yanfa.iApiService.NoticeApiService;
 import com.example.yanfa.interfaces.MainActivityInter;
 import com.example.yanfa.ui.activity.LoginActivity;
-import com.example.yanfa.util.RetrofitManager;
 import com.example.yanfa.widget.DrawerLayoutNoSlidingConflict;
 import com.google.android.material.navigation.NavigationView;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
  /**
   * MainActivity
@@ -49,7 +37,7 @@ import retrofit2.Response;
      private static Context mContext;
      private String phoneNum = null;
      private boolean ifLogin = false;
-     TextView textViewRegister;
+     private TextView textViewRegister;
 
 
     @Override
@@ -73,8 +61,7 @@ import retrofit2.Response;
 
         //更改DrawerLayout的侧滑距离
         DrawerLayoutNoSlidingConflict drawerLayout = findViewById(R.id.drawerLayout_main);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            setDrawerLeftEdgeSize(this,drawerLayout,0.2f);
+        setDrawerLeftEdgeSize(this,drawerLayout,0.2f);
 
         //将DrawerLayout和AppBar联合起来
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_main,R.id.nav_examine).setDrawerLayout(drawerLayout).build();
@@ -100,7 +87,7 @@ import retrofit2.Response;
         //判断是否已经登录
         ifLogin = getIntent().getBooleanExtra("ifLogin",false);
         if (ifLogin){
-            textViewRegister.setText("已登录");
+            textViewRegister.setText("已登录,点击重新登录");
             phoneNum = this.getSharedPreferences("user",MODE_PRIVATE)
                     .getString("phoneNum","0");
         }
@@ -201,7 +188,7 @@ import retrofit2.Response;
          super.onActivityResult(requestCode, resultCode, data);
          if (resultCode == 1) turn_enroll();
          if (resultCode == 2) {
-             textViewRegister.setText("已登录");
+             textViewRegister.setText("已登录，点击重新登录");
              ifLogin = true;
              if (data != null) {
                  phoneNum = data.getStringExtra("phoneNum");

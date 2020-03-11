@@ -364,17 +364,17 @@
 
                     <EditText
                         android:id="@+id/self_edt"
+                        android:textSize="15sp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-
-
                         android:enabled="true"
                         android:gravity="top"
                         android:hint="字数在120字以内"
                         android:inputType="textMultiLine"
                         android:scrollbars="vertical"
                         android:textColor="#1F1F1F	"
+                        android:maxLength="130"
                         tools:layout_editor_absoluteX="82dp"
                         tools:layout_editor_absoluteY="371dp">
 

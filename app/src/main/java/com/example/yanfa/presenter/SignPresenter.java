@@ -1,12 +1,15 @@
 package com.example.yanfa.presenter;
 
 import android.graphics.Bitmap;
+
+import com.example.yanfa.MainActivity;
 import com.example.yanfa.bean.RegLoginInfo;
 import com.example.yanfa.interfaces.BasePresentor;
 import com.example.yanfa.interfaces.LoginPresentorInter;
 import com.example.yanfa.interfaces.LoginUIInter;
 import com.example.yanfa.interfaces.ModelCallBack;
 import com.example.yanfa.model.SignModel;
+import com.example.yanfa.util.NetworkUtil;
 
 /**
  * 登录注册界面的presenter
@@ -15,23 +18,30 @@ import com.example.yanfa.model.SignModel;
 public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginPresentorInter {
     private SignModel mSignModel = new SignModel();
     private boolean ifCanSendCode = true;
-    private final int TIME_SPAN = 5;
+    private final int PHONE_CODE_TIME_SPAN = 60;
+    private final int IMAGE_CODE_TIME_SPAN = 1;
 
-    private int sendCodeTime = TIME_SPAN;
+
+
+    private int sendCodeTime = PHONE_CODE_TIME_SPAN;
     //注册界面发送验证码的按钮逻辑
     @Override
     public void sendCode(String phoneNum) {
         if (ifCanSendCode){
             ifCanSendCode = false;
-            getView().showProgressBar();
-            if(correctData(phoneNum,"password")){
+            if(NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
+                getView().showProgressBar();
                 mSignModel.registerGetCode(phoneNum, new ModelCallBack() {
                     @Override
                     public void onSucceed(Object result) {
                         String s = (String)result;
-                        if (s.equals("ok")) getView().showToast("获取成功，请注意查收");
+                        if (s.equals("ok")){
+                            getView().showToast("获取成功，请注意查收");
+                            startTime();
+                        }
                         else getView().showToast(s);
                         getView().closeProgressBar();
+
                     }
 
                     @Override
@@ -40,40 +50,44 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
                         getView().closeProgressBar();
                     }
                 });
-            }else getView().closeProgressBar();
+            }else{
+                getView().showToast("网络开了点小差");
+            }
 
-            //验证码发送间隔
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i=0;i<TIME_SPAN;i++){
-                        try {
-                            Thread.sleep(1000);
-                            addTime();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    ifCanSendCode = true;
-                    setTime();
 
-                }
-            }).start();
         }else{
-            getView().showToast("您发送验证码太频繁了"+String.valueOf(sendCodeTime)+"s");
+            getView().showToast("您发送验证码太频繁了"+ sendCodeTime +"s");
         }
+    }
+    //回调控制读秒
+    private void startTime(){
+        //验证码发送间隔
+        new Thread(() -> {
+            for (int i=0;i<PHONE_CODE_TIME_SPAN;i++){
+                try {
+                    Thread.sleep(1000);
+                    addTime();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            ifCanSendCode = true;
+            setTime();
+
+        }).start();
     }
     private void addTime(){
         sendCodeTime--;
     }
     private void setTime(){
-        sendCodeTime = TIME_SPAN;
+        sendCodeTime = PHONE_CODE_TIME_SPAN;
     }
+
 
     private static  int count = 0;
     @Override
     public void Login(final String phoneNum, final String password, final String code) {
-        if(correctData(phoneNum,password)){
+        if(NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
             getView().showProgressBar();
             final RegLoginInfo regLoginInfo = new RegLoginInfo(phoneNum,password,code);
             mSignModel.loginDo(regLoginInfo, new ModelCallBack() {
@@ -98,14 +112,19 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
 
                 }
             });
+        }else{
+            getView().showToast("网络开了点小差");
         }
 
     }
 
+
+
     @Override
     public void SignUp(String phoneNum, String password, String code) {
-        getView().showProgressBar();
-        if(correctData(phoneNum,password)){
+
+        if(NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
+            getView().showProgressBar();
             RegLoginInfo regLoginInfo = new RegLoginInfo(phoneNum,password,code);
             mSignModel.registerDo(regLoginInfo, new ModelCallBack() {
                 @Override
@@ -122,43 +141,74 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
                     getView().closeProgressBar();
                 }
             });
-        }else getView().closeProgressBar();
+        }else {
+            getView().showToast("网络开了点小差");
+        }
     }
+
+
 
     @Override
     public void resetPassword(String phoneNum, String password, String code) {
 
     }
 
+
+
+    private int countTime = 0;
     @Override
     public void setImageViewCode(String phoneNum) {
-        getView().showProgressBar();
-        mSignModel.loginGetCode(phoneNum, new ModelCallBack() {
-            @Override
-            public void onSucceed(Object result) {
-                Bitmap bitmap = (Bitmap)result;
-                getView().setCodeImageView(bitmap);
-                getView().closeProgressBar();
+        if (countTime == 0){
+            if (NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
+                getView().showProgressBar();
+                mSignModel.loginGetCode(phoneNum, new ModelCallBack() {
+                    @Override
+                    public void onSucceed(Object result) {
+                        Bitmap bitmap = (Bitmap)result;
+                        getView().setCodeImageView(bitmap);
+                        getView().closeProgressBar();
+                        startImageTime();
+                    }
+
+                    @Override
+                    public void onFail(Object result) {
+                        getView().showToast("获取验证码失败，请点击验证码重新获取");
+                        getView().closeProgressBar();
+                    }
+                });
+            }else{
+                getView().showToast("网络开了点小差");
             }
 
-            @Override
-            public void onFail(Object result) {
-                getView().showToast("获取验证码失败，请点击验证码重新获取");
-                getView().closeProgressBar();
+        }else{
+            getView().showToast("客官您不要急，看不清验证码再重新获取哦"+countTime+"s");
+        }
+
+    }
+    //回调控制读秒
+    private void startImageTime(){
+        resetTime();
+        //验证码发送间隔
+        new Thread(() -> {
+            for (int i=0;i<IMAGE_CODE_TIME_SPAN;i++){
+                try {
+                    Thread.sleep(1000);
+                    changeTime();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        });
+
+
+        }).start();
+    }
+    private void changeTime(){
+        countTime--;
+    }
+    private void resetTime(){
+        countTime = IMAGE_CODE_TIME_SPAN;
     }
 
 
-    private boolean correctData(String phoneNum,String password){
-        if (phoneNum.length()!=11) {
-            getView().showToast("请输入正确的手机号码");
-            return false;
-        }
-        else if (password==null) {
-            getView().showToast("请输入密码");
-            return false;
-        }
-        return true;
-    }
+
 }
