@@ -80,8 +80,6 @@
         android:id="@+id/textInputLayout_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-
         app:layout_constraintTop_toBottomOf="@id/center_point"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/imageView_code"
@@ -93,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/verification_code"
-            android:inputType="text"
+            android:inputType="textVisiblePassword"
             android:maxLength="4" />
 
     </com.google.android.material.textfield.TextInputLayout>
