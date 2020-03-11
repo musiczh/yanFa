@@ -105,8 +105,8 @@ public class ExamineFragment extends Fragment {
 
     private void addData() {
 
-                data.add(new ExamineInfo("笔试","通过", Color.parseColor("#238E23"),
-                        R.drawable.ex_pan,false));
+//                data.add(new ExamineInfo("笔试","通过", Color.parseColor("#238E23"),
+//                        R.drawable.ex_pan,false));
                 data.add(new ExamineInfo("一轮面试","未开放", Color.parseColor("#2F4F4F"),
                         R.drawable.ex_face,false));
                 data.add(new ExamineInfo("二轮面试","未开放", Color.parseColor("#2F4F4F"),
@@ -127,124 +127,124 @@ public class ExamineFragment extends Fragment {
                     if (response.body()!=null){
                         code = response.body().getData();
                         switch (code) {
-                            case 11:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "进行中", Color.parseColor("#FFFF00"),
-                                        R.drawable.ex_face,true));
-                                data.set(2, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_test,false));
-                                break;
-                            case 10:
-                                data.set(0, new ExamineInfo("笔试", "不通过", Color.parseColor("#f36c60"),
-                                        R.drawable.ex_pan,true));
-                                data.set(1, new ExamineInfo("一轮面试", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
-                                        R.drawable.ex_test,false));
-                                break;
+//                            case 11:
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+//                                data.set(1, new ExamineInfo("一轮面试", "进行中", Color.parseColor("#FFFF00"),
+//                                        R.drawable.ex_face,true));
+//                                data.set(2, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_face,false));
+//                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_test,false));
+//                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_test,false));
+//                                break;
+//                            case 10:
+//                                data.set(0, new ExamineInfo("笔试", "不通过", Color.parseColor("#f36c60"),
+//                                        R.drawable.ex_pan,true));
+//                                data.set(1, new ExamineInfo("一轮面试", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_face,false));
+//                                data.set(2, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_face,false));
+//                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_test,false));
+//                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+//                                        R.drawable.ex_test,false));
+//                                break;
                             case 21:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "进行中", Color.parseColor("#FFFF00"),
+                                data.set(1, new ExamineInfo("二轮面试", "进行中", Color.parseColor("#FFFF00"),
                                         R.drawable.ex_face,true));
-                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(2, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(3, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
                             case 20:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "不通过", Color.parseColor("#f36c60"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "不通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_face,true));
-                                data.set(2, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(1, new ExamineInfo("二轮面试", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(2, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(3, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
                             case 31:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
+                                data.set(1, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "进行中", Color.parseColor("#FFFF00"),
+                                data.set(2, new ExamineInfo("一轮考核", "进行中", Color.parseColor("#FFFF00"),
                                         R.drawable.ex_test,true));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(3, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
                             case 30:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "不通过", Color.parseColor("#f36c60"),
+                                data.set(1, new ExamineInfo("二轮面试", "不通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_face,true));
-                                data.set(3, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(2, new ExamineInfo("一轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(3, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
                             case 41:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
+                                data.set(1, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
+                                data.set(2, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "进行中", Color.parseColor("#FFFF00"),
+                                data.set(3, new ExamineInfo("二轮考核", "进行中", Color.parseColor("#FFFF00"),
                                         R.drawable.ex_test,true));
                                 break;
                             case 40:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
+                                data.set(1, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "不通过", Color.parseColor("#f36c60"),
+                                data.set(2, new ExamineInfo("一轮考核", "不通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_test,true));
-                                data.set(4, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
+                                data.set(3, new ExamineInfo("二轮考核", "未开放", Color.parseColor("#2F4F4F"),
                                         R.drawable.ex_test,false));
                                 break;
                             case 51:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
+                                data.set(1, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
+                                data.set(2, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "通过", Color.parseColor("#f36c60"),
+                                data.set(3, new ExamineInfo("二轮考核", "通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_test,true));
                                 break;
                             case 50:
-                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
-                                        R.drawable.ex_pan,false));
-                                data.set(1, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
+//                                data.set(0, new ExamineInfo("笔试", "通过", Color.parseColor("#238E23"),
+//                                        R.drawable.ex_pan,false));
+                                data.set(0, new ExamineInfo("一轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(2, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
+                                data.set(1, new ExamineInfo("二轮面试", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_face,false));
-                                data.set(3, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
+                                data.set(2, new ExamineInfo("一轮考核", "通过", Color.parseColor("#238E23"),
                                         R.drawable.ex_test,false));
-                                data.set(4, new ExamineInfo("二轮考核", "不通过", Color.parseColor("#f36c60"),
+                                data.set(3, new ExamineInfo("二轮考核", "不通过", Color.parseColor("#f36c60"),
                                         R.drawable.ex_test,true));
                                 break;
                             default:
