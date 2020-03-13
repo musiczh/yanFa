@@ -18,7 +18,7 @@ import com.example.yanfa.util.NetworkUtil;
 public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginPresentorInter {
     private SignModel mSignModel = new SignModel();
     private boolean ifCanSendCode = true;
-    private final int PHONE_CODE_TIME_SPAN = 60;
+    private final int PHONE_CODE_TIME_SPAN = 30;
 
 
 
