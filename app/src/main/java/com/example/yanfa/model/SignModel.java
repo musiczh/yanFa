@@ -12,11 +12,7 @@ import com.example.yanfa.iApiService.RegisterGetCodeApiService;
 import com.example.yanfa.interfaces.LoginModelInter;
 import com.example.yanfa.interfaces.ModelCallBack;
 import com.example.yanfa.util.RetrofitManager;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,7 +92,6 @@ public class SignModel implements LoginModelInter {
                         if (response.body()!=null){
                              InputStream i = response.body().byteStream();
                              Bitmap bitmap = BitmapFactory.decodeStream(i);
-
                             modelCallBack.onSucceed(bitmap);
                         }else{
                             modelCallBack.onFail("body==null");

@@ -19,7 +19,6 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
     private SignModel mSignModel = new SignModel();
     private boolean ifCanSendCode = true;
     private final int PHONE_CODE_TIME_SPAN = 60;
-    private final int IMAGE_CODE_TIME_SPAN = 1;
 
 
 
@@ -38,8 +37,13 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
                         if (s.equals("ok")){
                             getView().showToast("获取成功，请注意查收");
                             startTime();
+                        }else if (s.equals("太快")){
+                            getView().showToast("您发送验证太频繁了，歇一下吧");
+                            ifCanSendCode = true;
+                        } else{
+                            getView().showToast(s);
+                            ifCanSendCode = true;
                         }
-                        else getView().showToast(s);
                         getView().closeProgressBar();
 
                     }
@@ -155,59 +159,38 @@ public class SignPresenter extends BasePresentor<LoginUIInter> implements LoginP
 
 
 
-    private int countTime = 0;
     @Override
     public void setImageViewCode(String phoneNum) {
-        if (countTime == 0){
-            if (NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
-                getView().showProgressBar();
-                mSignModel.loginGetCode(phoneNum, new ModelCallBack() {
-                    @Override
-                    public void onSucceed(Object result) {
+
+        if (NetworkUtil.isNetworkAvailable(MainActivity.getContext())){
+            getView().showProgressBar();
+            mSignModel.loginGetCode(phoneNum, new ModelCallBack() {
+                @Override
+                public void onSucceed(Object result) {
+                    if (result==null){
+                        getView().showToast("您发送验证码太频繁了，歇一下吧");
+                        getView().closeProgressBar();
+                    }else{
                         Bitmap bitmap = (Bitmap)result;
                         getView().setCodeImageView(bitmap);
                         getView().closeProgressBar();
-                        startImageTime();
                     }
+                }
 
-                    @Override
-                    public void onFail(Object result) {
-                        getView().showToast("获取验证码失败，请点击验证码重新获取");
-                        getView().closeProgressBar();
-                    }
-                });
-            }else{
-                getView().showToast("网络开了点小差");
-            }
-
+                @Override
+                public void onFail(Object result) {
+                    getView().showToast("获取验证码失败，请点击验证码重新获取");
+                    getView().closeProgressBar();
+                }
+            });
         }else{
-            getView().showToast("客官您不要急，看不清验证码再重新获取哦"+countTime+"s");
+            getView().showToast("网络开了点小差");
         }
 
-    }
-    //回调控制读秒
-    private void startImageTime(){
-        resetTime();
-        //验证码发送间隔
-        new Thread(() -> {
-            for (int i=0;i<IMAGE_CODE_TIME_SPAN;i++){
-                try {
-                    Thread.sleep(1000);
-                    changeTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
 
 
-        }).start();
     }
-    private void changeTime(){
-        countTime--;
-    }
-    private void resetTime(){
-        countTime = IMAGE_CODE_TIME_SPAN;
-    }
+
 
 
 
